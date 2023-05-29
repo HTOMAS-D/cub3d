@@ -1,32 +1,10 @@
-NAME    = so_long
+NAME    = cub3d
 UNAME   := $(shell uname)
 LFLAGS  =  -L$(LIBMLX)
 OBJ     = $(SRC:%.c=%.o)
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP)
 RATES	= -D $(GRATE)
-SRC     =	srcs/animation.c \
-			srcs/canva.c \
-			srcs/check_path.c \
-			srcs/checks_game.c \
-			srcs/checks.c \
-			srcs/collect.c \
-			srcs/enemies.c \
-			srcs/enemy_patrol.c \
-			srcs/error.c \
-			srcs/ft_split.c \
-			$(GAME_C) \
-			srcs/gravity.c \
-			srcs/handle_keys.c \
-			srcs/lst_functions.c \
-			srcs/main.c \
-			srcs/map.c \
-			srcs/object.c \
-			srcs/player.c \
-			srcs/put_player.c \
-			srcs/sprites.c \
-			srcs/utils.c \
-			srcs/get_next_line_bonus.c \
-			srcs/get_next_line_utils_bonus.c
+SRC     =	srcs/main.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
@@ -81,11 +59,19 @@ re: fclean all
 show:
 	@printf "UNAME		: $(UNAME)\n"
 	@printf "NAME  		: $(NAME)\n"
-	@printf "CC		: $(CC)\n"
+	@printf "CC			: $(CC)\n"
 	@printf "CFLAGS		: $(CFLAGS)\n"
 	@printf "LFLAGS		: $(LFLAGS)\n"
 	@printf "SRC		: $(SRC)\n"
 	@printf "OBJ		: $(OBJ)\n"
+
+god:
+	git status
+	git add .
+	git status
+	git commit -m "🔥Random Makefile Commit🔥"
+	git status
+
 
 #COLORS
 GREEN = \033[1;32m
