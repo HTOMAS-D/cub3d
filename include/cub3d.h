@@ -14,6 +14,16 @@ struct s_cub
 
 //MAIN.C
 t_cub *cub(void);
+
+//EXIT.C
 void ez_exit(char *str);
+
+//PARSE_FILE.C
+void check_file(t_cub *cub, int ac, char **av);
+void check_scene(char *str);
+
+//STR_UTILS.C
+int ft_strlen(char *str);
+char *ft_strrchr(char *str, char c);
 
 #endif
