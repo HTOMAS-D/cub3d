@@ -7,7 +7,8 @@ t_cub *cub()
 
 }
 
-int main(int ac, char**av)
+int main(int ac, char **av)
 {
-	cub();
+	(void) av;
+	check_file(cub(), ac, av);
 }

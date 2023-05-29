@@ -4,7 +4,7 @@ LFLAGS  =  -L$(LIBMLX)
 OBJ     = $(SRC:%.c=%.o)
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP)
 RATES	= -D $(GRATE)
-SRC     =	srcs/main.c
+SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c srcs/gnl/get_next_line_utils.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
@@ -21,7 +21,7 @@ ifeq ($(UNAME), Darwin)
 	Q = KEY_Q=12
 	ESP = KEY_ESPACE=49
 	GRATE = GAME_RATE=17
-	GAME_C = srcs/game_mac.c
+	# GAME_C = srcs/game_mac.c
 else
 	INC	= /usr/include
 	CFLAGS  = -Wall -Werror -Wextra -g -I$(INC) -Iinclude -O3 $(KEYCODES) $(RATES) -Imlx_linux
@@ -37,7 +37,7 @@ else
 	Q = KEY_Q=113
 	ESP = KEY_ESPACE=65
 	GRATE = GAME_RATE=2100
-	GAME_C = srcs/game_linux.c
+	# GAME_C = srcs/game_linux.c
 endif
 
 all: $(NAME)
