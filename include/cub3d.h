@@ -23,7 +23,6 @@ struct s_cub
 //MAIN.C
 t_cub *cub(void);
 
-
 /*+****************** PARSING *********************/
 
 //PARSE_FILE.C
@@ -37,6 +36,7 @@ int count_map(int fd);
 
 //MAP_CHECKER.C
 void check_map(t_map *map);
+void get_img(t_map *map);
 
 
 /********************* UTILS **********************/
