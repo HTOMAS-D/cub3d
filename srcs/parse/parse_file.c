@@ -25,9 +25,9 @@ void check_scene(char *str)
 
 void check_file(t_cub *cub, int ac, char **av)
 {
-	(void) cub;
 	if (ac != 2)
 		ez_exit("Wrong number of arguments\nTry ./cub3d *map*");
 	check_scene(av[1]);
-	// cub->fd = open_file(cub, av[1]);
+	get_map(cub, av[1]);
+	// printf("%d\n", cub->map.fd = open_file(cub, av[1]));
 }
