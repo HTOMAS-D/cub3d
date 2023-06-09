@@ -12,6 +12,7 @@ typedef struct s_cub t_cub;
 struct s_map
 {
 	int fd;
+	char **map;
 };
 struct s_cub
 {
@@ -25,6 +26,10 @@ t_cub *cub(void);
 //EXIT.C
 void ez_exit(char *str);
 
+//FREES.C
+void free_matrix(char **matrix);
+void free_stuff(t_cub *cub);
+
 //PARSE_FILE.C
 void check_file(t_cub *cub, int ac, char **av);
 void check_scene(char *str);
@@ -33,6 +38,10 @@ void check_scene(char *str);
 //STR_UTILS.C
 // int ft_strlen(char *str);
 char *ft_strrchr(char *str, char c);
+char *ft_strjoin(char *s1, char *s2);
+
+//FT_SPLIT.C
+char **ft_split(char *str, char c);
 
 //MAP.C
 void get_map(t_cub *cub, char *file);

@@ -4,7 +4,9 @@ LFLAGS  =  -L$(LIBMLX)
 OBJ     = $(SRC:%.c=%.o)
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP)
 RATES	= -D $(GRATE)
-SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c
+SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
+				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
+				srcs/utils/str_utils.c srcs/utils/ft_split.c srcs/exit/frees.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include

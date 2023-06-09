@@ -2,17 +2,23 @@
 
 void get_map(t_cub *cub, char *file)
 {
-	int fd;
 	char *line = NULL;
-	(void) cub;
+	char *temp = NULL;
+	char *temp_free = NULL;
 
-	fd = open(file, O_RDONLY);
-	if (!fd)
+	cub->map.fd = open(file, O_RDONLY);
+	if (cub->map.fd)
 		ez_exit("Error opening the file");
-	while(line)
+	while(1)
 	{
-		line = get_next_line(fd);
-		printf("%s", line);
+		line = get_next_line(cub->map.fd);
+		if (!line)
+			break;
+		temp_free = temp;
+		temp = ft_strjoin(temp, line);
+		free(temp_free);
 		free(line);
 	}
+	cub->map.map = ft_split(temp, "\n");
+	free(temp);
 }
