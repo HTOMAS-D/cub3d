@@ -27,6 +27,7 @@ t_cub *cub(void);
 void ez_exit(char *str);
 
 //FREES.C
+void free_array(char *str);
 void free_matrix(char **matrix);
 void free_stuff(t_cub *cub);
 
@@ -36,14 +37,16 @@ void check_scene(char *str);
 // int open_file(t_cub *cub, char *file);
 
 //STR_UTILS.C
-// int ft_strlen(char *str);
+int ft_lenstr(char *str);
 char *ft_strrchr(char *str, char c);
 char *ft_strjoin(char *s1, char *s2);
+char *ft_strdup(char *str);
 
 //FT_SPLIT.C
 char **ft_split(char *str, char c);
 
 //MAP.C
 void get_map(t_cub *cub, char *file);
+int count_map(int fd);
 
 #endif

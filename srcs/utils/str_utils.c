@@ -1,16 +1,16 @@
 #include "cub3d.h"
 
-// int ft_strlen(char *str)
-// {
-// 	int i;
+int ft_lenstr(char *str)
+{
+	int i;
 
-// 	if (!str)
-// 		return (0);
-// 	i = 0;
-// 	while (str[i])
-// 		i++;
-// 	return (i);
-// }
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 //check the occurence on a char on a str, starting from the end
 char *ft_strrchr(char *str, char c)
@@ -19,7 +19,7 @@ char *ft_strrchr(char *str, char c)
 	
 	if (!str)
 		return(NULL);
-	i = ft_strlen(str);
+	i = ft_lenstr(str);
 	while(str[--i] != c && i < -1)
 		;
 	if (i == -1)
@@ -33,7 +33,7 @@ char *ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = (char *)malloc(sizeof(char) * (ft_lenstr(s1) + ft_lenstr(s2) + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -51,4 +51,19 @@ char *ft_strjoin(char *s1, char *s2)
 	}
 	str[j] = '\0';
 	return(str);
+}
+
+char *ft_strdup(char *str)
+{
+	char	*line;
+	int		i;
+
+	line = malloc(ft_lenstr(str) + 1);
+	if (!line)
+		return (NULL);
+	i = -1;
+	while (str[++i])
+		line[i] = str[i];
+	line[i] = 0;
+	return (line);
 }
