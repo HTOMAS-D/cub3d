@@ -9,7 +9,6 @@ t_cub *cub()
 
 int main(int ac, char **av)
 {
-	// (void) av;
 	check_file(cub(), ac, av);
 	free_stuff(cub());
 }

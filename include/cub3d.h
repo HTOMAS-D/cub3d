@@ -23,18 +23,23 @@ struct s_cub
 //MAIN.C
 t_cub *cub(void);
 
-//EXIT.C
-void ez_exit(char *str);
 
-//FREES.C
-void free_array(char *str);
-void free_matrix(char **matrix);
-void free_stuff(t_cub *cub);
+/*+****************** PARSING *********************/
 
 //PARSE_FILE.C
 void check_file(t_cub *cub, int ac, char **av);
 void check_scene(char *str);
-// int open_file(t_cub *cub, char *file);
+
+
+//MAP.C
+void get_map(t_cub *cub, char *file);
+int count_map(int fd);
+
+//MAP_CHECKER.C
+void check_map(t_map *map);
+
+
+/********************* UTILS **********************/
 
 //STR_UTILS.C
 int ft_lenstr(char *str);
@@ -45,8 +50,15 @@ char *ft_strdup(char *str);
 //FT_SPLIT.C
 char **ft_split(char *str, char c);
 
-//MAP.C
-void get_map(t_cub *cub, char *file);
-int count_map(int fd);
+
+/********************** EXIT/FREES **********************/
+
+//EXIT.C
+void ez_exit(char *str);
+
+//FREES.C
+void free_array(char *str);
+void free_matrix(char **matrix);
+void free_stuff(t_cub *cub);
 
 #endif
