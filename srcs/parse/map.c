@@ -23,15 +23,18 @@ void get_map(t_cub *cub, char *file)
 	int size;
 
 	cub->map.fd = open(file, O_RDONLY);
-	if (!cub->map.fd)
+	if (cub->map.fd < 0)
 		ez_exit("Error opening the file");
 	size = count_map(cub->map.fd);
 	close(cub->map.fd);
-	cub->map.map = malloc(sizeof(char *) * size + 1);
-	cub->map.map[size] = NULL;
+	cub->map.map = malloc(sizeof(char *) * (size + 1));
+	if (!cub->map.map)
+		ez_exit("Memory allocation failed");
 	cub->map.fd = open(file, O_RDONLY);
+	if (cub->map.fd < 0)
+		ez_exit("Error opening the file");
 	size = 0;
-	while(1)
+	while (1)
 	{
 		line = get_next_line(cub->map.fd);
 		if (!line)
@@ -39,5 +42,6 @@ void get_map(t_cub *cub, char *file)
 		cub->map.map[size++] = ft_strdup(line);
 		free_array(line);
 	}
+	cub->map.map[size] = NULL;
 	close(cub->map.fd);
 }

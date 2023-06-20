@@ -24,6 +24,7 @@ struct s_map
 	t_data data;
 	int fd;
 	char **map;
+	char **img_paths;
 };
 struct s_cub
 {
@@ -48,6 +49,8 @@ int count_map(int fd);
 //MAP_CHECKER.C
 void check_map(t_map *map);
 void get_img(t_map *map);
+int check_path_letters(char *str);
+int letters_check(t_data *data);
 
 
 /********************* UTILS **********************/
@@ -66,10 +69,12 @@ char **ft_split(char *str, char c);
 
 //EXIT.C
 void ez_exit(char *str);
+void parse_exit(t_map *map, char *str);
+void	free_exit(t_cub *cub, char *str);
 
 //FREES.C
 void free_array(char *str);
-void free_matrix(char **matrix);
+void free_matrix(char ***matrix);
 void free_stuff(t_cub *cub);
 
 #endif
