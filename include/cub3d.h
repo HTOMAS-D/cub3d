@@ -8,9 +8,20 @@
 
 typedef struct s_map t_map;
 typedef struct s_cub t_cub;
+typedef struct s_data t_data;
 
+struct s_data
+{
+	int NO;
+	int SO;
+	int	WE;
+	int EA;
+	int F;
+	int C;
+};
 struct s_map
 {
+	t_data data;
 	int fd;
 	char **map;
 };
