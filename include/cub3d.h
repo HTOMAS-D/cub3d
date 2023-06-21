@@ -5,6 +5,7 @@
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include "../mlx/mlx.h"
 
 typedef struct s_map t_map;
 typedef struct s_cub t_cub;
@@ -29,11 +30,13 @@ struct s_map
 struct s_cub
 {
 	t_map map;
+	void *mlx;
 };
 
 
 //MAIN.C
 t_cub *cub(void);
+void create_game(t_cub * cub);
 
 /*+****************** PARSING *********************/
 

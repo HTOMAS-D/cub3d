@@ -1,80 +1,54 @@
-NAME    = cub3d
-UNAME   := $(shell uname)
-LFLAGS  =  -L$(LIBMLX)
-OBJ     = $(SRC:%.c=%.o)
-KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP)
-RATES	= -D $(GRATE)
-SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
+NAME		= cub3d
+
+SRCS		= srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
 				srcs/utils/str_utils.c srcs/utils/ft_split.c srcs/exit/frees.c	\
 				srcs/parse/map_checker.c
 
-ifeq ($(UNAME), Darwin)
-	INC	= /usr/local/include
-	CFLAGS  = -Wall -Werror -Wextra -g -I$(INC) -Iinclude -O3 $(KEYCODES) $(RATES) -Imlx
-	CC = @gcc
-	LIBMLX  = mlx
-	LFLAGS += -framework OpenGL -framework AppKit -lmlx -Imlx -fsanitize=address -g
-	ESC = KEY_ESC=53
-	W = KEY_W=13
-	A = KEY_A=0
-	S = KEY_S=1
-	D = KEY_D=2
-	R = KEY_R=15
-	Q = KEY_Q=12
-	ESP = KEY_ESPACE=49
-	GRATE = GAME_RATE=17
-	# GAME_C = srcs/game_mac.c
-else
-	INC	= /usr/include
-	CFLAGS  = -Wall -Werror -Wextra -g -I$(INC) -Iinclude -O3 $(KEYCODES) $(RATES) -Imlx_linux
-	CC = @cc
-	LIBMLX  = mlx_linux
-	LFLAGS += -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz #-fsanitize=address -g
-	ESC = KEY_ESC=65307
-	W = KEY_W=119
-	A = KEY_A=97
-	S = KEY_S=115
-	D = KEY_D=100
-	R = KEY_R=114
-	Q = KEY_Q=113
-	ESP = KEY_ESPACE=65
-	GRATE = GAME_RATE=2100
-	# GAME_C = srcs/game_linux.c
-endif
+OBJS		= $(SRCS:%.c=%.o)
 
-all: $(NAME)
+MLX		= ./mlx/libmlx.a
 
-$(NAME): $(OBJ) 
-	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
-	@echo "$(GREEN)Toma la pah --> $(YELLOW)$(NAME)$(DEFAULT)"
+MLX_FLAGS	= -framework OpenGL -framework AppKit
+
+LINKS		= -L mlx -lmlx -L
+
+INCLUDES	= -I mlx -I .
+
+CC		= gcc -Wall -Wextra -Werror -g -fsanitize=address
+
+RM		= rm -f
+
+.c.o:
+			$(CC) -c $< -o $@
+
+all:		$(NAME)
+
+$(NAME): 	 $(MLX) $(OBJS)
+			$(CC) $(MLX) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+			@echo "$(GREEN)Successfully built --> $(YELLOW)$(NAME)$(DEFAULT)"
+
+$(MLX):
+			make -C mlx
 
 clean:
-	@rm -f $(OBJ)
-	@echo "$(RED)Housekeeping...$(DEFAULT)"
+			$(RM) $(OBJS)
 
-fclean: clean
-	@rm -f $(NAME)
-	@echo "$(RED)Byeee, files removed!$(DEFAULT)"
+fclean:		clean
+			$(RM) $(NAME)
+			make -C mlx clean
+			@echo "$(RED)Files Removed!$(DEFAULT)"
 
-re: fclean all
+re:			fclean all
 
-show:
-	@printf "UNAME		: $(UNAME)\n"
-	@printf "NAME  		: $(NAME)\n"
-	@printf "CC			: $(CC)\n"
-	@printf "CFLAGS		: $(CFLAGS)\n"
-	@printf "LFLAGS		: $(LFLAGS)\n"
-	@printf "SRC		: $(SRC)\n"
-	@printf "OBJ		: $(OBJ)\n"
+.PHONY:		all clean re fclean
 
 god:
-	git status
-	git add .
-	git status
-	git commit -m "🔥Random Makefile Commit🔥"
-	git status
-
+			git status
+			git add .
+			git status
+			git commit -m "🔥Random Makefile Commit🔥"
+			git status
 
 #COLORS
 GREEN = \033[1;32m
