@@ -57,9 +57,7 @@ char *ft_strdup(char *str)
 {
 	char	*line;
 	int		i;
-	// int nl;
 
-	// nl = ft_lenstr(str);
 	line = malloc(ft_lenstr(str) + 1);
 	if (!line)
 		return (NULL);

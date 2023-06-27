@@ -38,6 +38,7 @@ int check_path_letters(char *str)
 void get_img(t_map *map)
 {
 	int i;
+	int fd;
 
 	i = -1;
 	map->img_paths = calloc(sizeof(char*), 5);
@@ -48,19 +49,24 @@ void get_img(t_map *map)
 	{
 		if(check_path_letters(map->map[i]))
 			parse_exit(map, "wrong identifier");
-		// printf("NO: %d\n", map->data.NO);
-		// printf("SO: %d\n", map->data.SO);
-		// printf("WE: %d\n", map->data.WE);
-		// printf("EA: %d\n\n", map->data.EA);
 	}
 	if (letters_check(&(map->data)))
 		parse_exit(map, "Missing identifiers");
 	i = -1;
-	while(++i < 4)
+	while(map->map[++i] && i < 4)
 	{
 		map->img_paths[i] = ft_strdup(&map->map[i][3]);
-		printf("string %d: %s\n",i ,map->img_paths[i]);
+		fd = open(map->img_paths[i], O_RDONLY);
+		if (fd == -1)
+			parse_exit(map, "Cannot open image");
+		else
+			close(fd);
 	}
+}
+
+void get_colors(t_map *map)
+{
+	
 }
 
 void check_map(t_map *map)
@@ -70,4 +76,6 @@ void check_map(t_map *map)
 	map->data.WE = 0;
 	map->data.EA = 0;
 	get_img(map);
+	get_colors(map);
+
 }
