@@ -61,6 +61,7 @@ struct s_map
 	int fd;
 	char **map;
 	char **img_paths;
+	char **color_str;
 };
 
 struct s_player
@@ -104,7 +105,12 @@ void check_map(t_map *map);
 void get_img(t_map *map);
 int check_path_letters(char *str);
 int letters_check(t_data *data);
+
+//COLOR_CHECKER.C
 void get_colors(t_map *map);
+int check_color_letters(char *str);
+int all_color(t_data *data);
+
 
 
 /********************* UTILS **********************/
