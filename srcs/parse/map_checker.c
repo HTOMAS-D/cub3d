@@ -32,7 +32,6 @@ int check_path_letters(char *str)
 	}
 	else
 		return 1;
-	
 }
 
 void get_img(t_map *map)
