@@ -44,9 +44,6 @@ void get_colors(t_map *map)
 		parse_exit(map, "Missing identifier");
 	i = 4;
 	while(map->map[++i] && i < 7)
-	{
 		map->color_str[++j] = ft_strdup(&map->map[i][2]);
-		printf("color str: %s\n", map->color_str[j]);
-	}
 }
 
