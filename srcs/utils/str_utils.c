@@ -57,12 +57,14 @@ char *ft_strdup(char *str)
 {
 	char	*line;
 	int		i;
+	// int nl;
 
+	// nl = ft_lenstr(str);
 	line = malloc(ft_lenstr(str) + 1);
 	if (!line)
 		return (NULL);
 	i = -1;
-	while (str[++i])
+	while (str[++i] && str[i] != '\n')
 		line[i] = str[i];
 	line[i] = 0;
 	return (line);

@@ -20,9 +20,6 @@ void parse_exit(t_map *map, char *str)
 
 void free_exit(t_cub *cub, char *str)
 {
-    // int i;
-
-    // i = -1;
     if (cub->map.map)
     {
         free_matrix(&(cub->map.map));
@@ -31,6 +28,6 @@ void free_exit(t_cub *cub, char *str)
     {
         free_matrix(&(cub->map.img_paths));
     }
-    // free_mlx(cub); ( in the future maybeee)
+    // free_mlx(cub);
     ez_exit(str);
 }

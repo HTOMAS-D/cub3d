@@ -31,22 +31,13 @@ int check_path_letters(char *str)
 		return 0;
 	}
 	else
-	{
-		// printf("NO: %d\n", cub()->map.data.NO);
-		// printf("SO: %d\n", cub()->map.data.SO);
-		// printf("WE: %d\n", cub()->map.data.WE);
-		// printf("EA: %d\n", cub()->map.data.EA);
 		return 1;
-	}
 	
 }
 
 void get_img(t_map *map)
 {
-	// make a image struct (maybe?) to store each path to images, call the free stuff function if it fails to allocate
-	// the strings to store the paths.
 	int i;
-	// int j;
 
 	i = -1;
 	map->img_paths = calloc(sizeof(char*), 5);
@@ -57,14 +48,19 @@ void get_img(t_map *map)
 	{
 		if(check_path_letters(map->map[i]))
 			parse_exit(map, "wrong identifier");
-		printf("NO: %d\n", map->data.NO);
-		printf("SO: %d\n", map->data.SO);
-		printf("WE: %d\n", map->data.WE);
-		printf("EA: %d\n\n", map->data.EA);
+		// printf("NO: %d\n", map->data.NO);
+		// printf("SO: %d\n", map->data.SO);
+		// printf("WE: %d\n", map->data.WE);
+		// printf("EA: %d\n\n", map->data.EA);
 	}
 	if (letters_check(&(map->data)))
 		parse_exit(map, "Missing identifiers");
-	
+	i = -1;
+	while(++i < 4)
+	{
+		map->img_paths[i] = ft_strdup(&map->map[i][3]);
+		printf("string %d: %s\n",i ,map->img_paths[i]);
+	}
 }
 
 void check_map(t_map *map)

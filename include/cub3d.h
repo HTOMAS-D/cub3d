@@ -5,11 +5,45 @@
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include <math.h>
 #include "../mlx/mlx.h"
+
+//SCREEN STUFF
+# define SCREENW				1280
+# define SCREENH				720
+# define MM_W				250
+# define MM_H				250
+
+//MAC KEYCODES
+#  define KEY_ESC	53
+#  define KEY_W		13
+#  define KEY_A		0
+#  define KEY_S		1
+#  define KEY_D		2
+#  define ARROW_LEFT 	123
+#  define ARROW_RIGHT	124
 
 typedef struct s_map t_map;
 typedef struct s_cub t_cub;
 typedef struct s_data t_data;
+typedef struct s_player t_player;
+typedef struct s_screen t_screen;
+typedef struct s_ray t_ray;
+
+struct s_ray
+{
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	double deltaDistX;
+	double deltaDistY;
+};
+
+struct s_screen
+{
+	int x_axis;
+};
 
 struct s_data
 {
@@ -20,6 +54,7 @@ struct s_data
 	int F;
 	int C;
 };
+
 struct s_map
 {
 	t_data data;
@@ -27,10 +62,25 @@ struct s_map
 	char **map;
 	char **img_paths;
 };
+
+struct s_player
+{
+	double posX;
+	double posY;
+	double	dirY;
+	double	dirX;
+	double	fovX;
+	double	fovY;
+};
+
 struct s_cub
 {
 	t_map map;
 	void *mlx;
+	void *win;
+	t_player player;
+	t_screen screen;
+	t_ray ray;
 };
 
 
@@ -79,5 +129,9 @@ void	free_exit(t_cub *cub, char *str);
 void free_array(char *str);
 void free_matrix(char ***matrix);
 void free_stuff(t_cub *cub);
+void free_mlx(t_cub *cub);
+
+//RAYCASTER.C
+void raycaster(t_cub *cub);
 
 #endif
