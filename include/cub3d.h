@@ -116,6 +116,9 @@ int all_color(t_data *data);
 void isolate_map (t_map *map);
 int line_nbr(char **map);
 
+//PLAYER.C
+void	get_player_vars(t_map *map);
+
 
 
 /********************* UTILS **********************/
