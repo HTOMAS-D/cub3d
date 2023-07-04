@@ -73,5 +73,6 @@ void check_map(t_map *map)
 	map->data.C = 0;
 	get_img(map);
 	get_colors(map);
+	isolate_map(map);
 
 }

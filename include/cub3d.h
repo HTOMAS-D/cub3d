@@ -62,6 +62,7 @@ struct s_map
 	char **map;
 	char **img_paths;
 	char **color_str;
+	char **iso_map;
 };
 
 struct s_player
@@ -110,6 +111,10 @@ int letters_check(t_data *data);
 void get_colors(t_map *map);
 int check_color_letters(char *str);
 int all_color(t_data *data);
+
+//ISOLATE_MAP.C
+void isolate_map (t_map *map);
+int line_nbr(char **map);
 
 
 

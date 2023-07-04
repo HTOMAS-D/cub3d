@@ -52,6 +52,8 @@ void free_stuff(t_cub *cub)
         free_matrix(&(cub->map.img_paths));
         cub->map.img_paths = NULL;
     }
+	if (cub->map.iso_map)
+        free_matrix(&(cub->map.iso_map));
 }
 
 
