@@ -106,7 +106,8 @@ struct s_cub
 
 //MAIN.C
 t_cub *cub(void);
-void create_game(t_cub * cub);
+void create_game(t_cub *cub);
+void init_screen(t_cub *cub);
 
 /*+****************** PARSING *********************/
 
