@@ -6,12 +6,6 @@ t_cub *cub()
 	return(&cub);
 }
 
-void get_player(t_cub * cub)
-{
-	cub->player.posX = 10;
-	cub->player.posY = 10;
-}
-
 void create_game(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -20,8 +14,8 @@ void create_game(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SCREENW, SCREENH, "cub3d");
 	if (!cub->win)
 		free_exit(cub, "mlx_new_window failed");
-	mlx_mouse_hide(cub->mlx, cub->win);
-	get_player(cub);
+	// mlx_mouse_hide(cub->mlx, cub->win);
+	// get_player(cub);
 	init_player_vars(cub);
 	// raycaster(cub);
 	mlx_loop(cub->mlx);

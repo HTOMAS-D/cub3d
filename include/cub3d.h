@@ -27,9 +27,24 @@ typedef struct s_map t_map;
 typedef struct s_cub t_cub;
 typedef struct s_data t_data;
 typedef struct s_player t_player;
-typedef struct s_screen t_screen;
 typedef struct s_ray t_ray;
+typedef struct s_image t_image;
 
+
+struct s_image
+{
+	void	*ptr;
+	char	*addr;
+	int		bpp;	
+	int		size_line;	
+	int		endian;		
+	int		width;
+	int		height;
+	int		ceilingpoint;
+	int		floorPoint;
+	double	wallH;
+	int		x_axis;
+};
 struct s_ray
 {
 	double rayDirX;
@@ -44,11 +59,6 @@ struct s_ray
 	int stepX;
 	int stepY;
 	int side;
-};
-
-struct s_screen
-{
-	int x_axis;
 };
 
 struct s_data
@@ -88,7 +98,7 @@ struct s_cub
 	void *mlx;
 	void *win;
 	t_player player;
-	t_screen screen;
+	t_image screen;
 	t_ray ray;
 	int numb_players;
 };
@@ -156,6 +166,15 @@ void free_array(char *str);
 void free_matrix(char ***matrix);
 void free_stuff(t_cub *cub);
 void free_mlx(t_cub *cub);
+
+
+
+
+//IMG_UTIL.C
+void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+void	render(t_cub *cub);
+
+
 
 //RAYCASTER.C
 void raycaster(t_cub *cub);
