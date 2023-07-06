@@ -34,10 +34,14 @@ struct s_ray
 {
 	double rayDirX;
 	double rayDirY;
-	int mapX;
-	int mapY;
 	double deltaDistX;
 	double deltaDistY;
+	double sidedistY;
+	double sidedistX;
+	int mapX;
+	int mapY;
+	int stepX;
+	int stepY;
 };
 
 struct s_screen

@@ -4,12 +4,24 @@ void calc_step(t_cub *cub, t_ray *ray)
 {
 	if(ray->rayDirX < 0)
 	{
+		ray->stepY = -1;
+		ray->sidedistY = (cub->player.posY - ray->mapY) * ray->deltaDistY
 	}
 	else
+	{
+		ray->stepY = 1;
+		ray->sidedistY = (ray->mapY + 1 - cub->player.posY) * ray->deltaDistY;
+	}
 	if(ray->rayDirY < 0)
+	{
+		ray->stepX = -1;
+		ray->sidedistX = (cub->player.posX - ray->mapX) * ray->deltaDistX;
+	}
 	else
-	
-	
+	{
+		ray->stepX = 1;
+		ray->sidedistX = (ray->mapX + 1 - cub->player.posX) *ray->deltaDistX;
+	}	
 }
 
 void raycaster(t_cub * cub)
