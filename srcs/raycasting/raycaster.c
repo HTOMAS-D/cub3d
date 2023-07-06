@@ -1,6 +1,16 @@
 #include "cub3d.h"
 
-
+void calc_step(t_cub *cub, t_ray *ray)
+{
+	if(ray->rayDirX < 0)
+	{
+	}
+	else
+	if(ray->rayDirY < 0)
+	else
+	
+	
+}
 
 void raycaster(t_cub * cub)
 {
@@ -17,6 +27,6 @@ void raycaster(t_cub * cub)
 		cub->ray.mapY = (int)cub->player.posY;
 		cub->ray.deltaDistX = (cub->ray.rayDirX == 0) ? 1e30 : fabs(1 / cub->ray.rayDirX);
 		cub->ray.deltaDistY = (cub->ray.rayDirY == 0) ? 1e30 : fabs(1 / cub->ray.rayDirY);
-				
+		calc_step(cub, &(cub->ray));
 	}
 }

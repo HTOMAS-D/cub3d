@@ -121,6 +121,7 @@ int line_nbr(char **map);
 //PLAYER.C
 void	get_player_vars(char **map);
 void add_vars(int x, int y, char **map);
+void init_player_vars(t_cub *cub);
 
 
 
@@ -152,5 +153,6 @@ void free_mlx(t_cub *cub);
 
 //RAYCASTER.C
 void raycaster(t_cub *cub);
+void calc_step(t_cub *cub, t_ray *ray);
 
 #endif

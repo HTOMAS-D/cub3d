@@ -16,7 +16,7 @@ ifeq ($(UNAME), Darwin)
 	CFLAGS  = -Wall -Werror -Wextra -g -I$(INC) -Iinclude -O3 $(KEYCODES) $(RATES) -Imlx
 	CC = @gcc
 	LIBMLX  = mlx
-	LFLAGS += -framework OpenGL -framework AppKit -fsanitize=address -g #-lmlx -Imlx
+	LFLAGS += -framework OpenGL -framework AppKit -fsanitize=address -g -lmlx -Imlx
 	ESC = KEY_ESC=53
 	W = KEY_W=13
 	A = KEY_A=0

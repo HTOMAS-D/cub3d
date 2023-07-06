@@ -23,22 +23,22 @@ void free_matrix(char ***matrix)
 	*matrix = NULL;
 }
 
-// void free_mlx(t_cub *cub)
-// {
-// 	if (cub->mlx != NULL)
-// 	{
-// 		free(cub->mlx);
-// 		cub->mlx = NULL;
-// 	}
-// 	else if (cub->win != NULL)
-// 	{
-// 		mlx_destroy_display(cub->mlx);
-// 		mlx_destroy_window(cub->mlx, cub->win);
-// 		free(cub->mlx);
-// 		cub->mlx = NULL;
-// 		cub->win = NULL;
-// 	}
-// }
+void free_mlx(t_cub *cub)
+{
+	if (cub->mlx != NULL)
+	{
+		free(cub->mlx);
+		cub->mlx = NULL;
+	}
+	if (cub->win != NULL)
+	{
+		// mlx_destroy_display(cub->mlx);
+		mlx_destroy_window(cub->mlx, cub->win);
+		free(cub->mlx);
+		cub->mlx = NULL;
+		cub->win = NULL;
+	}
+}
 
 void free_stuff(t_cub *cub)
 {

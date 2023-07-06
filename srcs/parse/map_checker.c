@@ -74,5 +74,5 @@ void check_map(t_map *map)
 	get_img(map);
 	get_colors(map);
 	isolate_map(map);
-	get_player_vars(map->iso_map); //inside the player.c will be readung the iso_map to get player starting vars
+	get_player_vars(map->iso_map); //inside the player.c will be reading the iso_map to get player starting vars
 }
