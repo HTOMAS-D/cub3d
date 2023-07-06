@@ -73,6 +73,7 @@ struct s_player
 	double	dirX;
 	double	fovX;
 	double	fovY;
+	char	orientation;
 };
 
 struct s_cub
@@ -83,6 +84,7 @@ struct s_cub
 	t_player player;
 	t_screen screen;
 	t_ray ray;
+	int numb_players;
 };
 
 
@@ -118,6 +120,8 @@ int line_nbr(char **map);
 
 //PLAYER.C
 void	get_player_vars(char **map);
+void add_vars(int x, int y, char **map);
+
 
 
 
