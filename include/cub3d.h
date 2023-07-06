@@ -38,10 +38,12 @@ struct s_ray
 	double deltaDistY;
 	double sidedistY;
 	double sidedistX;
+	double wall_dist;
 	int mapX;
 	int mapY;
 	int stepX;
 	int stepY;
+	int side;
 };
 
 struct s_screen
@@ -158,5 +160,6 @@ void free_mlx(t_cub *cub);
 //RAYCASTER.C
 void raycaster(t_cub *cub);
 void calc_step(t_cub *cub, t_ray *ray);
+void ray_hit(t_cub *cub, t_ray *ray);
 
 #endif
