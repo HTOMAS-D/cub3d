@@ -10,14 +10,14 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/parse/map_checker.c srcs/raycasting/raycaster.c \
 				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
 				srcs/parse/player.c srcs/raycasting/img_util.c \
-				srcs/raycasting/hooks.c
+				srcs/raycasting/hooks.c srcs/raycasting/moves.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
 	CFLAGS  = -Wall -Werror -Wextra -g -I$(INC) -Iinclude -O3 $(KEYCODES) $(RATES) -Imlx
 	CC = @gcc
 	LIBMLX  = mlx
-	LFLAGS += -framework OpenGL -framework AppKit -fsanitize=address -g -lmlx -Imlx
+	LFLAGS += -framework OpenGL -framework AppKit -lmlx -Imlx -fsanitize=address -g
 	ESC = KEY_ESC=53
 	W = KEY_W=13
 	A = KEY_A=0

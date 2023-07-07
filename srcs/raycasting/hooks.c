@@ -10,21 +10,23 @@ int move_mouse(int x, int y, t_cub *cub)
 {
 	// if (cub->game_won)
 	// 	return 0;
-	
-	(void)y;
-	mlx_mouse_get_pos(cub->win, &x, &y);
-	
-	if (x != SCREENW / 2)
-	{
-		double move_x = MOUSE_SENSITIVITY * (x - SCREENW / 2) / (double)SCREENW;
-		rotation(&cub->player, move_x);
-		raycaster(cub);
-		render(cub);
-		mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
-	}
-	
+
+	// Calculate the mouse movement in the X direction
+	int move_x = x - (SCREENW / 2);
+	(void) y;
+	// Rotate the player's view based on the mouse movement
+	rotation(&(cub->player), MOUSE_SENSITIVITY * move_x);
+
+	// Update the raycasting and render the scene
+	raycaster(cub);
+	render(cub);
+
+	// Reset the mouse position to the center of the screen
+	mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
+
 	return 1;
 }
+
 
 void rotation(t_player *player, double angle)
 {
@@ -46,7 +48,16 @@ void rotation(t_player *player, double angle)
 
 int get_key(int key, t_cub *cub)
 {
+	printf("pressed\n");
 	if(key == KEY_ESC)
 		free_exit(cub, "Exit was successfull");
+	if(key == KEY_W)
+		move_w(cub);
+	if(key == KEY_S)
+		move_s(cub);
+	if(key == KEY_A)
+		move_a(cub);
+	if(key == KEY_D)
+		move_d(cub);
 	return 0;
 }

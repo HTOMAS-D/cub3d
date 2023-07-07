@@ -1,44 +1,48 @@
 #include "cub3d.h"
 
-void	put_screen(t_cub *cub, t_ray *ray)
+void put_screen(t_cub *cub)
 {
-	int color;
-	int color1;
-	int color2;
-	int h;
+    int skyColor = 0x0000FF;   // Blue color for the sky
+    int groundColor = 0x808080; // Grey color for the ground
+    int wallColor = 0x00FF00;   // Green color for the walls
 
-	color = 0x840036;
-	color1 = 0x20a8c7;
-	color2 = 0x2b251d;
-	if (ray->side == 1)
-		color /= 1.5;
-	h = -1;
-	while (++h < cub->screen.floorPoint)
-		my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, color1);
-    h--;
-	while (++h < cub->screen.ceilingpoint)
-		my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, color);
-    h--;
-	while (++h < SCREENH)
-		my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, color2);
-    // printf("X = %d\n",cub->screen.x);
+    // Draw the sky
+    for (int h = 0; h < SCREENH / 2; h++)
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, skyColor);
+
+    // Draw the ground
+    for (int h = SCREENH / 2; h < SCREENH; h++)
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, groundColor);
+
+    // Render the walls
+    for (int h = cub->screen.ceilingpoint; h <= cub->screen.floorPoint; h++)
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, wallColor);
+
     mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.ptr, 0, 0);
 }
 
+
 void get_wall(t_cub *cub, t_ray *ray)
 {
-	if (ray->side == 0)
-		ray->wall_dist = (ray->sidedistX - ray->deltaDistX);
-	else
-		ray->wall_dist = (ray->sidedistY - ray->deltaDistY);
-	cub->screen.wallH = (int)(SCREENH / ray->wall_dist) / 2;
-	cub->screen.floorPoint = SCREENH / 2 - cub->screen.wallH / 2;
-	if(cub->screen.floorPoint < 0)
-		cub->screen.floorPoint = 0;
-	cub->screen.ceilingpoint = SCREENH / 2 + cub->screen.wallH / 2;
-	if(cub->screen.ceilingpoint >= SCREENH)
-		cub->screen.ceilingpoint = SCREENH - 1;
+    if (ray->side == 0)
+        ray->wall_dist = (ray->sidedistX - ray->deltaDistX);
+    else
+        ray->wall_dist = (ray->sidedistY - ray->deltaDistY);
+
+    double wallDist = fabs(ray->side == 0 ? (ray->mapX - cub->player.posX + (1 - ray->stepX) / 2) / ray->rayDirX
+                                          : (ray->mapY - cub->player.posY + (1 - ray->stepY) / 2) / ray->rayDirY);
+
+    cub->screen.wallH = (int)(SCREENH / wallDist);
+
+    cub->screen.floorPoint = SCREENH / 2 + cub->screen.wallH / 2;
+    if (cub->screen.floorPoint >= SCREENH)
+        cub->screen.floorPoint = SCREENH - 1;
+
+    cub->screen.ceilingpoint = SCREENH / 2 - cub->screen.wallH / 2;
+    if (cub->screen.ceilingpoint < 0)
+        cub->screen.ceilingpoint = 0;
 }
+
 
 void ray_hit(t_cub *cub, t_ray *ray)
 {
@@ -66,27 +70,28 @@ void ray_hit(t_cub *cub, t_ray *ray)
 
 void calc_step(t_cub *cub, t_ray *ray)
 {
-	if(ray->rayDirX < 0)
-	{
-		ray->stepY = -1;
-		ray->sidedistY = (cub->player.posY - ray->mapY) * ray->deltaDistY;
-	}
-	else
-	{
-		ray->stepY = 1;
-		ray->sidedistY = (ray->mapY + 1 - cub->player.posY) * ray->deltaDistY;
-	}
-	if(ray->rayDirY < 0)
-	{
-		ray->stepX = -1;
-		ray->sidedistX = (cub->player.posX - ray->mapX) * ray->deltaDistX;
-	}
-	else
-	{
-		ray->stepX = 1;
-		ray->sidedistX = (ray->mapX + 1 - cub->player.posX) *ray->deltaDistX;
-	}	
+    if (ray->rayDirX < 0)
+    {
+        ray->stepX = -1;
+        ray->sidedistX = (cub->player.posX - ray->mapX) * ray->deltaDistX;
+    }
+    else
+    {
+        ray->stepX = 1;
+        ray->sidedistX = (ray->mapX + 1.0 - cub->player.posX) * ray->deltaDistX;
+    }
+    if (ray->rayDirY < 0)
+    {
+        ray->stepY = -1;
+        ray->sidedistY = (cub->player.posY - ray->mapY) * ray->deltaDistY;
+    }
+    else
+    {
+        ray->stepY = 1;
+        ray->sidedistY = (ray->mapY + 1.0 - cub->player.posY) * ray->deltaDistY;
+    }
 }
+
 
 void raycaster(t_cub * cub)
 {
@@ -94,7 +99,7 @@ void raycaster(t_cub * cub)
 	double viewx;
 
 	cub->screen.x_axis = -1;
-	while(++(cub->screen.x_axis) < SCREENW)
+	while(++cub->screen.x_axis < SCREENW)
 	{
 		//calculate ray position and direction
 		viewx = 2 * cub->screen.x_axis / (double)SCREENW - 1; //x-coordinate in camera space
@@ -107,7 +112,7 @@ void raycaster(t_cub * cub)
 		calc_step(cub, &(cub->ray));
 		ray_hit(cub, &(cub->ray));
 		get_wall(cub, &(cub->ray));
-		put_screen(cub, &(cub->ray));
+		put_screen(cub); //, &(cub->ray)
 	}
 	render(cub);
 }

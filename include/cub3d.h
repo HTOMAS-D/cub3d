@@ -2,6 +2,7 @@
 #define CUB3D_H
 
 #include "macros.h"
+#include "string.h"
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
@@ -20,6 +21,7 @@
 # define MOUSE_MOVE 6
 # define MOUSE_SENSITIVITY 1
 # define KEY_PRESS 2
+# define MOVE_SPEED 0.05
 
 //MAC KEYCODES
 #  define KEY_ESC	53
@@ -51,6 +53,7 @@ struct s_image
 	int		floorPoint;
 	double	wallH;
 	int		x_axis;
+	int *data;
 };
 struct s_ray
 {
@@ -197,5 +200,11 @@ int move_mouse(int x, int y, t_cub *cub);
 void rotation(t_player *player, double move);
 int get_key(int key, t_cub *cub);
 
+
+//MOVES.C
+void move_w(t_cub *cub);
+void move_a(t_cub *cub);
+void move_s(t_cub *cub);
+void move_d(t_cub *cub);
 
 #endif
