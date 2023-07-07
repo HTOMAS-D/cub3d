@@ -24,7 +24,7 @@ void init_player_vars(t_cub *cub)
 	else if(cub->player.orientation == 'W')
 	{
 		cub->player.dirX = -1;
-		cub->player.fovX = 0.66;
+		cub->player.fovX = -0.66;
 	}
 }
 

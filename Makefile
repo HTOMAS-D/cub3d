@@ -9,7 +9,8 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/utils/str_utils.c srcs/utils/ft_split.c srcs/exit/frees.c	\
 				srcs/parse/map_checker.c srcs/raycasting/raycaster.c \
 				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
-				srcs/parse/player.c srcs/raycasting/img_util.c
+				srcs/parse/player.c srcs/raycasting/img_util.c \
+				srcs/raycasting/hooks.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include

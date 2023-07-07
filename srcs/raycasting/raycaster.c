@@ -8,8 +8,8 @@ void	put_screen(t_cub *cub, t_ray *ray)
 	int h;
 
 	color = 0x840036;
-	color1 = 0x740036;
-	color2 = 0x640036;
+	color1 = 0x20a8c7;
+	color2 = 0x2b251d;
 	if (ray->side == 1)
 		color /= 1.5;
 	h = -1;
@@ -30,7 +30,7 @@ void get_wall(t_cub *cub, t_ray *ray)
 	if (ray->side == 0)
 		ray->wall_dist = (ray->sidedistX - ray->deltaDistX);
 	else
-		ray->wall_dist = (ray->deltaDistY - ray->deltaDistY);
+		ray->wall_dist = (ray->sidedistY - ray->deltaDistY);
 	cub->screen.wallH = (int)(SCREENH / ray->wall_dist) / 2;
 	cub->screen.floorPoint = SCREENH / 2 - cub->screen.wallH / 2;
 	if(cub->screen.floorPoint < 0)
@@ -93,7 +93,7 @@ void raycaster(t_cub * cub)
 	double viewx;
 
 	cub->screen.x_axis = -1;
-	while(cub->screen.x_axis < SCREENW)
+	while(++cub->screen.x_axis < SCREENW)
 	{
 		//calculate ray position and direction
 		viewx = 2 * cub->screen.x_axis / (double)SCREENW - 1; //x-coordinate in camera space

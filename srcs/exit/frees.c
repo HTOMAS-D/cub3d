@@ -27,12 +27,6 @@ void free_mlx(t_cub *cub)
 {
 	if (cub->mlx != NULL)
 	{
-		free(cub->mlx);
-		cub->mlx = NULL;
-	}
-	if (cub->win != NULL)
-	{
-		// mlx_destroy_display(cub->mlx);
 		mlx_destroy_window(cub->mlx, cub->win);
 		free(cub->mlx);
 		cub->mlx = NULL;
@@ -53,7 +47,10 @@ void free_stuff(t_cub *cub)
         cub->map.img_paths = NULL;
     }
 	if (cub->map.iso_map)
+	{
         free_matrix(&(cub->map.iso_map));
+		cub->map.iso_map = NULL;
+	}
 }
 
 

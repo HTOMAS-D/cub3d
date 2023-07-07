@@ -23,9 +23,9 @@ void create_game(t_cub *cub)
 		free_exit(cub, "mlx_new_window failed");
 	
 	// mlx_mouse_hide(cub->mlx, cub->win);
-	// get_player(cub);
 	init_player_vars(cub);
-	// raycaster(cub);
+	raycaster(cub);
+	mlx_hook(cub->win, 17, 0, close_game, cub);
 	mlx_loop(cub->mlx);
 }
 

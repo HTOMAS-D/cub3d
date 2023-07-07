@@ -182,4 +182,9 @@ void raycaster(t_cub *cub);
 void calc_step(t_cub *cub, t_ray *ray);
 void ray_hit(t_cub *cub, t_ray *ray);
 
+
+//HOOKS.C
+int close_game(t_cub *cub);
+
+
 #endif
