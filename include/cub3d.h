@@ -13,6 +13,13 @@
 # define SCREENH				720
 # define MM_W				250
 # define MM_H				250
+# define PI 3.14159
+
+//EVENTS
+# define EXIT_KEY 17
+# define MOUSE_MOVE 6
+# define MOUSE_SENSITIVITY 10
+# define KEY_PRESS 2
 
 //MAC KEYCODES
 #  define KEY_ESC	53
@@ -185,6 +192,9 @@ void ray_hit(t_cub *cub, t_ray *ray);
 
 //HOOKS.C
 int close_game(t_cub *cub);
+int move_mouse(int x, int y, t_cub *cub);
+void rotation(t_cub *cub, double move);
+int get_key(int key, t_cub *cub);
 
 
 #endif
