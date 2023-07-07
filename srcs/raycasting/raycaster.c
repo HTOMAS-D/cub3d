@@ -90,10 +90,11 @@ void calc_step(t_cub *cub, t_ray *ray)
 
 void raycaster(t_cub * cub)
 {
+	
 	double viewx;
 
 	cub->screen.x_axis = -1;
-	while(++cub->screen.x_axis < SCREENW)
+	while(++(cub->screen.x_axis) < SCREENW)
 	{
 		//calculate ray position and direction
 		viewx = 2 * cub->screen.x_axis / (double)SCREENW - 1; //x-coordinate in camera space

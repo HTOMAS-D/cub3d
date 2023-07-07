@@ -2,7 +2,7 @@
 
 void render(t_cub* cub)
 {
-	mlx_do_sync(cub->mlx);
+	// mlx_do_sync(cub->mlx);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.ptr, 0, 0);
 }
 

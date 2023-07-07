@@ -9,7 +9,7 @@ void init_player_vars(t_cub *cub)
 	if(cub->player.orientation == 'N')
 	{
 		cub->player.dirY = 1;
-		cub->player.fovY = 0.66;
+		cub->player.fovY = -0.66;
 	}
 	else if(cub->player.orientation == 'S')
 	{
