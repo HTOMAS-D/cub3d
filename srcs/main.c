@@ -24,7 +24,7 @@ void create_game(t_cub *cub)
 	// mlx_mouse_hide();
 	init_player_vars(cub);
 	raycaster(cub);
-	mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub); //SHITS NOT WORKING 1L << 6
+	// mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub); //SHITS NOT WORKING 1L << 6
 	mlx_hook(cub->win, EXIT_KEY, 0, close_game, cub);
 	mlx_hook(cub->win, KEY_PRESS, 1l << 0, get_key, cub);
 	mlx_loop(cub->mlx);

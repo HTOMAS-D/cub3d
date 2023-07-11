@@ -114,5 +114,5 @@ void raycaster(t_cub * cub)
 		get_wall(cub, &(cub->ray));
 		put_screen(cub); //, &(cub->ray)
 	}
-	render(cub);
+	// render(cub);
 }
