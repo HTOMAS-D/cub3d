@@ -46,6 +46,7 @@ void rotation(t_player *player, double angle)
 
 
 
+
 int get_key(int key, t_cub *cub)
 {
 	//printf("pressed\n");
