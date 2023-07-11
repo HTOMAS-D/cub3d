@@ -24,6 +24,7 @@ void move_s(t_cub *cub)
 
 void move_a(t_cub *cub)
 {
+	printf("{POS X} = %f\n{POS Y} = %f\n{FOV X} = %f\n{FOV Y} = %f\n", cub->player.posX, cub->player.posY, cub->player.fovX, cub->player.fovY);
 	double newPosX = cub->player.posX - cub->player.fovX * MOVE_SPEED;
 	double newPosY = cub->player.posY - cub->player.fovY * MOVE_SPEED;
 	if (cub->map.iso_map[(int)newPosY][(int)newPosX] != '1') // Check if the new position is a valid location

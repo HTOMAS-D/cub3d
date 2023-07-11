@@ -51,6 +51,8 @@ void free_stuff(t_cub *cub)
         free_matrix(&(cub->map.iso_map));
 		cub->map.iso_map = NULL;
 	}
+	if (cub->fps_str)
+		free(cub->fps_str);
 }
 
 

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <math.h>
+# include <sys/time.h>
 #include "../mlx/mlx.h"
 
 //SCREEN STUFF
@@ -24,11 +25,11 @@
 # define MOVE_SPEED 0.05
 
 //MAC KEYCODES
-#  define KEY_ESC	53
-#  define KEY_W		13
-#  define KEY_A		0
-#  define KEY_S		1
-#  define KEY_D		2
+// #  define KEY_ESC	53
+// #  define KEY_W		13
+// #  define KEY_A		0
+// #  define KEY_S		1
+// #  define KEY_D		2
 #  define ARROW_LEFT 	123
 #  define ARROW_RIGHT	124
 
@@ -108,6 +109,10 @@ struct s_cub
 	t_map map;
 	void *mlx;
 	void *win;
+	char	*fps_str;
+	int		n_renders;
+	struct timeval old_time;
+	struct timeval new_time;
 	t_player player;
 	t_image screen;
 	t_ray ray;
@@ -165,6 +170,9 @@ char *ft_strdup(char *str);
 //FT_SPLIT.C
 char **ft_split(char *str, char c);
 
+//FT_ITOA.C
+char *ft_itoa(int nbr);
+
 
 /********************** EXIT/FREES **********************/
 
@@ -184,8 +192,7 @@ void free_mlx(t_cub *cub);
 
 //IMG_UTIL.C
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
-void	render(t_cub *cub);
-
+int		render(t_cub *cub);
 
 
 //RAYCASTER.C

@@ -10,7 +10,7 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/parse/map_checker.c srcs/raycasting/raycaster.c \
 				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
 				srcs/parse/player.c srcs/raycasting/img_util.c \
-				srcs/raycasting/hooks.c srcs/raycasting/moves.c
+				srcs/raycasting/hooks.c srcs/raycasting/moves.c srcs/utils/ft_itoa.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
@@ -30,10 +30,10 @@ ifeq ($(UNAME), Darwin)
 	# GAME_C = srcs/game_mac.c
 else
 	INC	= /usr/include
-	CFLAGS  = -Wall -Werror -Wextra -g -I$(INC) -Iinclude -O3 $(KEYCODES) $(RATES) -Imlx_linux
+	CFLAGS  = -Wall -Werror -Wextra -g $(KEYCODES) -I$(INC) -Iinclude -O3 $(RATES) -Imlx_linux
 	CC = @cc
 	LIBMLX  = mlx_linux
-	LFLAGS += -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz #-fsanitize=address -g
+	LFLAGS += -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -fsanitize=address -g
 	ESC = KEY_ESC=65307
 	W = KEY_W=119
 	A = KEY_A=97
@@ -42,7 +42,7 @@ else
 	R = KEY_R=114
 	Q = KEY_Q=113
 	ESP = KEY_ESPACE=65
-	GRATE = GAME_RATE=2100
+	GRATE = GAME_RATE=100
 	# GAME_C = srcs/game_linux.c
 endif
 

@@ -48,7 +48,7 @@ void rotation(t_player *player, double angle)
 
 int get_key(int key, t_cub *cub)
 {
-	printf("pressed\n");
+	//printf("pressed\n");
 	if(key == KEY_ESC)
 		free_exit(cub, "Exit was successfull");
 	if(key == KEY_W)

@@ -17,8 +17,6 @@ void put_screen(t_cub *cub)
     // Render the walls
     for (int h = cub->screen.ceilingpoint; h <= cub->screen.floorPoint; h++)
         my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, wallColor);
-
-    mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.ptr, 0, 0);
 }
 
 
@@ -112,7 +110,7 @@ void raycaster(t_cub * cub)
 		calc_step(cub, &(cub->ray));
 		ray_hit(cub, &(cub->ray));
 		get_wall(cub, &(cub->ray));
-		put_screen(cub); //, &(cub->ray)
+	    put_screen(cub); //, &(cub->ray)
 	}
 	// render(cub);
 }

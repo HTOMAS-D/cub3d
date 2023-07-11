@@ -21,12 +21,13 @@ void create_game(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SCREENW, SCREENH, "cub3d");
 	if (!cub->win)
 		free_exit(cub, "mlx_new_window failed");
-	// mlx_mouse_hide();
+	//mlx_mouse_hide();
 	init_player_vars(cub);
-	raycaster(cub);
-	// mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub); //SHITS NOT WORKING 1L << 6
+	//mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub); //SHITS NOT WORKING 1L << 6
+	cub->fps_str = NULL;
 	mlx_hook(cub->win, EXIT_KEY, 0, close_game, cub);
 	mlx_hook(cub->win, KEY_PRESS, 1l << 0, get_key, cub);
+	mlx_loop_hook(cub->mlx, &render, cub);
 	mlx_loop(cub->mlx);
 }
 
