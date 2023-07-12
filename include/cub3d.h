@@ -20,8 +20,9 @@
 //EVENTS
 # define EXIT_KEY 17
 # define MOUSE_MOVE 6
-# define MOUSE_SENSITIVITY 1
+# define MOUSE_SENSITIVITY 0.005
 # define KEY_PRESS 2
+# define KEY_RELEASE 3
 # define MOVE_SPEED 0.05
 
 //MAC KEYCODES
@@ -93,6 +94,15 @@ struct s_map
 	char **iso_map;
 };
 
+struct s_move
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+};
+
+
 struct s_player
 {
 	double posX;
@@ -102,6 +112,7 @@ struct s_player
 	double	fovX;
 	double	fovY;
 	char	orientation;
+	struct s_move	move;
 };
 
 struct s_cub
@@ -205,6 +216,7 @@ void ray_hit(t_cub *cub, t_ray *ray);
 int close_game(t_cub *cub);
 int move_mouse(int x, int y, t_cub *cub);
 void rotation(t_player *player, double move);
+int	key_release(int key, t_cub *cub);
 int get_key(int key, t_cub *cub);
 
 
