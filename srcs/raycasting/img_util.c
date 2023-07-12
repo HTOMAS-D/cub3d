@@ -13,24 +13,15 @@ int	update_player(t_cub *cub)
 	return (0);
 }
 
-int	update_game(t_cub *cub)
-{
-	update_player(cub);
-	raycaster(cub);
-	return (0);
-}
-
-int render(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2- RENDER
+int	render(t_cub *cub)
 {
 	unsigned long	time;
 
-	update_game(cub);
 	if (!cub->n_renders)
 		gettimeofday(&cub->old_time, NULL);
 	cub->n_renders++;
 	gettimeofday(&cub->new_time, NULL);
 	time = (cub->new_time.tv_sec - cub->old_time.tv_sec);
-	//raycaster(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.ptr, 0, 0);
 	if (cub->fps_str)
 		mlx_string_put(cub->mlx, cub->win, 32, 36, \
@@ -42,6 +33,20 @@ int render(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2- R
 		gettimeofday(&cub->old_time, NULL);
 		cub->n_renders = 0;
 	}
+	return (0);
+}
+
+int	update_game(t_cub *cub)
+{
+	update_player(cub);
+	raycaster(cub);
+	return (0);
+}
+
+int game_loop(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2- RENDER
+{
+	update_game(cub);
+	render(cub);
 	return (0);
 }
 

@@ -204,6 +204,7 @@ void free_mlx(t_cub *cub);
 //IMG_UTIL.C
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int		render(t_cub *cub);
+int game_loop(t_cub* cub);
 
 
 //RAYCASTER.C
