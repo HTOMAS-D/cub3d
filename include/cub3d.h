@@ -126,6 +126,7 @@ struct s_cub
 	struct timeval new_time;
 	t_player player;
 	t_image screen;
+	t_image	wall;
 	t_ray ray;
 	int numb_players;
 };
@@ -202,10 +203,13 @@ void free_mlx(t_cub *cub);
 
 
 //IMG_UTIL.C
+int		get_color(t_image *img, int x, int y);
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int		render(t_cub *cub);
 int game_loop(t_cub* cub);
 
+//SPRITES.C
+int	init_sprites(t_cub *cub);
 
 //RAYCASTER.C
 void raycaster(t_cub *cub);

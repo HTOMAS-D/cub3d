@@ -25,6 +25,7 @@ void free_matrix(char ***matrix)
 
 void free_mlx(t_cub *cub)
 {
+	//mlx_destroy_image(cub->mlx, &cub->wall);
 	if (cub->mlx != NULL)
 	{
 		mlx_destroy_window(cub->mlx, cub->win);

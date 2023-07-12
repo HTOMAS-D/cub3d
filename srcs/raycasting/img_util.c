@@ -50,6 +50,14 @@ int game_loop(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2
 	return (0);
 }
 
+int	get_color(t_image *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
+	return (*(unsigned int *) dst);
+}
+
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 {
 	char	*dst;
