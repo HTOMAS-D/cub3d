@@ -50,10 +50,25 @@ int game_loop(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2
 	return (0);
 }
 
-int	get_color(t_image *img, int x, int y)
+int	get_color(t_image *img, int x, int y, double size)
 {
 	char	*dst;
+	int s;
 
+	s = (int)size * 10;
+	while (s < 10)
+		s /= 10;
+	if (s >= 5)
+		size += 1;
+	// size = size;
+	//printf("%d\n", size);
+	y -= cub()->screen.ceilingpoint;
+	y /= (int)size;
+	while (x > 64)
+		x /= 64;
+	//printf("%d - %d\n", y, x);
+	//printf("-  %d\n", y);
+	// y /= size;
 	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 	return (*(unsigned int *) dst);
 }

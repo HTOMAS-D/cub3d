@@ -203,7 +203,7 @@ void free_mlx(t_cub *cub);
 
 
 //IMG_UTIL.C
-int		get_color(t_image *img, int x, int y);
+int		get_color(t_image *img, int x, int y, double size);
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
 int		render(t_cub *cub);
 int game_loop(t_cub* cub);
