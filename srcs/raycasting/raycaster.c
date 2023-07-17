@@ -15,7 +15,7 @@ void put_screen(t_cub *cub)
 
     // Render the walls
     for (int h = cub->screen.ceilingpoint; h <= cub->screen.floorPoint; h++)
-        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(&cub->wall, cub->screen.x_axis, h, (cub->screen.floorPoint - cub->screen.ceilingpoint) / 64));
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(&cub->wall, cub->screen.x_axis, h));
 }
 
 
@@ -30,6 +30,14 @@ void get_wall(t_cub *cub, t_ray *ray)
                                      : (ray->mapY - cub->player.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
 
     cub->screen.wallH = (int)(SCREENH / wallDist);
+    cub->screen.wallW = (int) (SCREENW / wallDist);
+
+    cub->screen.rightPoint = SCREENW / 2 - cub->screen.wallW / 2;
+     if (cub->screen.rightPoint >= SCREENW)
+        cub->screen.rightPoint = SCREENW - 1;
+    cub->screen.leftPoint = SCREENW / 2 + cub->screen.wallW / 2;
+     if (cub->screen.leftPoint < 0)
+        cub->screen.leftPoint = 0;
 
     cub->screen.floorPoint = SCREENH / 2 + cub->screen.wallH / 2;
     if (cub->screen.floorPoint >= SCREENH)
