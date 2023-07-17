@@ -12,7 +12,7 @@ int move_mouse(int x, int y, t_cub *cub)
 	// 	return 0;
 
 	// Calculate the mouse movement in the X direction
-	int move_x = x - (SCREENW / 2);
+	int move_x = (SCREENW / 2) - x;
 	(void) y;
 	// Rotate the player's view based on the mouse movement
 	rotation(&(cub->player), MOUSE_SENSITIVITY * move_x);
@@ -22,7 +22,7 @@ int move_mouse(int x, int y, t_cub *cub)
 	// render(cub);
 
 	// Reset the mouse position to the center of the screen
-	//mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
+	mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
 
 	return 1;
 }
@@ -36,6 +36,7 @@ void rotation(t_player *player, double angle)
 	angle *= 3.14159 / 180;
 	x = player->dirY * cos(angle) + player->dirX * sin(angle);
 	y = player->dirY * -sin(angle) + player->dirX * cos(angle);
+	printf("moved %f  ||  %f\n", x, y);
 	player->dirY = x;
 	player->dirX = y;
 	x = player->fovX * cos(angle) + player->fovY * sin(angle);
