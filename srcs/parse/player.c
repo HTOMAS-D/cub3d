@@ -7,32 +7,32 @@ void init_player_vars(t_cub *cub)
 	cub->player.dirX = 0;
 	cub->player.dirY = 0;
 	printf("%c\n", cub->player.orientation);
-	if(cub->player.orientation == 'N')
-	{
-		cub->player.dirY = 1;
-		cub->player.fovY = -0.66;
-	}
-	else if(cub->player.orientation == 'S')
-	{
-		cub->player.dirY = -1;
-		cub->player.fovY = 0.66;
-	}
-	else if(cub->player.orientation == 'E')
-	{
-		cub->player.dirX = 1;
-		cub->player.fovX = 0.66;
-	}
-	else if(cub->player.orientation == 'W')
-	{
-		cub->player.dirX = -1;
-		cub->player.fovX = -0.66;
-	}
+	 if (cub->player.orientation == 'N')
+    {
+        cub->player.dirY = -1;
+        cub->player.fovX = 0.66;
+    }
+    else if (cub->player.orientation == 'S')
+    {
+        cub->player.dirY = 1;
+        cub->player.fovX = -0.66;
+    }
+    else if (cub->player.orientation == 'E')
+    {
+        cub->player.dirX = 1;
+        cub->player.fovY = 0.66;
+    }
+    else if (cub->player.orientation == 'W')
+    {
+        cub->player.dirX = -1;
+        cub->player.fovY = -0.66;
+    }
 }
 
 void add_vars(int x, int y, char **map) //is this *static void* ?
 {
-	cub()->player.posX = x; // + 0.5
-	cub()->player.posY = y; // + 0.5
+	cub()->player.posX = x + 0.5; // + 0.5
+	cub()->player.posY = y+ 0.5; // + 0.5
 	cub()->numb_players++;
 	cub()->player.orientation = map[y][x];
 	map[y][x] = '0';

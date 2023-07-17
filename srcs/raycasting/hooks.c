@@ -22,28 +22,32 @@ int move_mouse(int x, int y, t_cub *cub)
 	// render(cub);
 
 	// Reset the mouse position to the center of the screen
-	//mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
+	mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
 
 	return 1;
 }
 
-
 void rotation(t_player *player, double angle)
 {
-	double	x;
-	double	y;
+    // Convert the angle from degrees to radians
+    double radians = angle * (M_PI / 180.0);
 
-	angle *= 3.14159 / 180;
-	x = player->dirY * cos(angle) + player->dirX * sin(angle);
-	y = player->dirY * -sin(angle) + player->dirX * cos(angle);
-	player->dirY = x;
-	player->dirX = y;
-	x = player->fovX * cos(angle) + player->fovY * sin(angle);
-	y = player->fovX * -sin(angle) + player->fovY * cos(angle);
-	player->fovX = x;
-	player->fovY = y;
+    // Compute the sine and cosine of the angle
+    double cosAngle = cos(radians);
+    double sinAngle = sin(radians);
+
+    // Rotate the player's direction vector
+    double newDirX = player->dirX * cosAngle - player->dirY * sinAngle;
+    double newDirY = player->dirX * sinAngle + player->dirY * cosAngle;
+    player->dirX = newDirX;
+    player->dirY = newDirY;
+
+    // Rotate the player's FOV vector
+    double newFovX = player->fovX * cosAngle - player->fovY * sinAngle;
+    double newFovY = player->fovX * sinAngle + player->fovY * cosAngle;
+    player->fovX = newFovX;
+    player->fovY = newFovY;
 }
-
 
 int	key_release(int key, t_cub *cub)
 {

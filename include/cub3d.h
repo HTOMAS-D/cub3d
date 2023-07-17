@@ -20,7 +20,7 @@
 //EVENTS
 # define EXIT_KEY 17
 # define MOUSE_MOVE 6
-# define MOUSE_SENSITIVITY 0.005
+# define MOUSE_SENSITIVITY 0.05
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define MOVE_SPEED 0.05
@@ -163,12 +163,12 @@ int all_color(t_data *data);
 void isolate_map (t_map *map);
 int line_nbr(char **map);
 
+
+
 //PLAYER.C
-void	get_player_vars(char **map);
-void add_vars(int x, int y, char **map);
 void init_player_vars(t_cub *cub);
-
-
+void add_vars(int x, int y, char **map);
+void	get_player_vars(char **map);
 
 
 /********************* UTILS **********************/
