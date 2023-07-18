@@ -12,7 +12,7 @@ int move_mouse(int x, int y, t_cub *cub)
 	// 	return 0;
 
 	// Calculate the mouse movement in the X direction
-	int move_x = (SCREENW / 2) - x;
+	int move_x = x - (SCREENW / 2);
 	(void) y;
 	// Rotate the player's view based on the mouse movement
 	rotation(&(cub->player), MOUSE_SENSITIVITY * move_x);
