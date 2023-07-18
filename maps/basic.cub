@@ -1,7 +1,7 @@
-NO 
-SO ./img/S.xpm
-WE ./img/E.xpm
-EA ./img/W.xpm
+NO ./pics/colorstone.xpm
+SO ./pics/colorstone.xpm
+WE ./pics/colorstone.xpm
+EA ./pics/colorstone.xpm
 
 F 74,41,41
 C 231,236,249
