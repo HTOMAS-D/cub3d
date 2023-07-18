@@ -30,20 +30,18 @@ void get_wall(t_cub *cub, t_ray *ray)
                                      : (ray->mapY - cub->player.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
 
     cub->screen.wallH = (int)(SCREENH / wallDist);
-    cub->screen.wallW = (int) (SCREENW / wallDist);
 
-    cub->screen.rightPoint = SCREENW / 2 - cub->screen.wallW / 2;
-     if (cub->screen.rightPoint >= SCREENW)
-        cub->screen.rightPoint = SCREENW - 1;
-    cub->screen.leftPoint = SCREENW / 2 + cub->screen.wallW / 2;
-     if (cub->screen.leftPoint < 0)
-        cub->screen.leftPoint = 0;
-
+    if (cub->ray.side == 0) cub->ray.wallx = cub->player.posY  + ray->wall_dist * ray->rayDirY;
+      else  cub->ray.wallx = cub->player.posX + ray->wall_dist * ray->rayDirX;
+      cub->ray.wallx -= floor((cub->ray.wallx));
+    
     cub->screen.floorPoint = SCREENH / 2 + cub->screen.wallH / 2;
+    cub->screen.text_end = cub->screen.floorPoint;
     if (cub->screen.floorPoint >= SCREENH)
         cub->screen.floorPoint = SCREENH - 1;
 
     cub->screen.ceilingpoint = SCREENH / 2 - cub->screen.wallH / 2;
+    cub->screen.text_start = cub->screen.ceilingpoint;
     if (cub->screen.ceilingpoint < 0)
         cub->screen.ceilingpoint = 0;
 }

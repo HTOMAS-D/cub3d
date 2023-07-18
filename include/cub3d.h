@@ -53,10 +53,9 @@ struct s_image
 	int		height;
 	int		ceilingpoint;
 	int		floorPoint;
-	int		leftPoint;
-	int		rightPoint;
+	int		text_start;
+	int		text_end;
 	double	wallH;
-	double	wallW;
 	int		x_axis;
 	int *data;
 };
