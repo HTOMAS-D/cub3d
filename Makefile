@@ -49,7 +49,8 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
+$(NAME): $(OBJ)
+	make -C mlx
 	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
 	@echo "$(GREEN)Toma la pah --> $(YELLOW)$(NAME)$(DEFAULT)"
 
@@ -59,6 +60,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	make -C mlx clean
 	@echo "$(RED)Byeee, files removed!$(DEFAULT)"
 
 re: fclean all
