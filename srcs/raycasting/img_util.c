@@ -50,22 +50,42 @@ int game_loop(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2
 	return (0);
 }
 
-int	get_color(t_image *img, int x, int y, double size)
+int treat_var_get_color(int var, double size, int start)
+{
+	int temp;
+
+	size /= 64;
+	temp = (int)size * 10;
+	temp = temp % 10;
+	if (temp >= 4)
+		size++;
+	var -= start;
+	var /= size;
+	return (var);
+}
+
+int	get_color(t_image *img, int x, int y)
 {
 	char	*dst;
-	int s;
+	//int s;
 
-	s = (int)size * 10;
-	while (s < 10)
-		s /= 10;
-	if (s >= 5)
-		size += 1;
-	// size = size;
-	//printf("%d\n", size);
-	y -= cub()->screen.ceilingpoint;
-	y /= (int)size;
-	while (x > 64)
-		x /= 64;
+	//printf("- %f\n", size);
+	// //printf("- %f\n", size);
+	// s = (int)size * 10;
+	// // printf("-- %f\n", size);
+	// s = s % 10;
+	// // printf("--- %f\n", size);
+	// size += 1;
+	// // printf("---- %f\n", size);
+	// // size = size;
+	// y -= cub()->screen.ceilingpoint;
+	// y /= (int)size;
+	// exit(1);
+	y = treat_var_get_color(y, (cub()->screen.floorPoint - cub()->screen.ceilingpoint), cub()->screen.ceilingpoint);
+	// while (x > 64)
+	// 	x /= 64;
+	x = treat_var_get_color(x, cub()->screen.rightPoint - cub()->screen.leftPoint, cub()->screen.rightPoint);
+
 	//printf("%d - %d\n", y, x);
 	//printf("-  %d\n", y);
 	// y /= size;
