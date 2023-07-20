@@ -10,7 +10,7 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/parse/map_checker.c srcs/raycasting/raycaster.c \
 				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
 				srcs/parse/player.c srcs/raycasting/img_util.c \
-				srcs/raycasting/hooks.c srcs/raycasting/moves.c srcs/utils/ft_itoa.c \
+				$(HOOKS_C) srcs/raycasting/moves.c srcs/utils/ft_itoa.c \
 				srcs/sprites.c
 
 ifeq ($(UNAME), Darwin)
@@ -28,7 +28,7 @@ ifeq ($(UNAME), Darwin)
 	Q = KEY_Q=12
 	ESP = KEY_ESPACE=49
 	GRATE = GAME_RATE=17
-	# GAME_C = srcs/game_mac.c
+	HOOKS_C = srcs/raycasting/hooks_mac.c
 else
 	INC	= /usr/include
 	CFLAGS  = -Wall -Werror -Wextra -g $(KEYCODES) -I$(INC) -Iinclude -O3 $(RATES) -Imlx_linux
@@ -44,7 +44,7 @@ else
 	Q = KEY_Q=113
 	ESP = KEY_ESPACE=32
 	GRATE = GAME_RATE=100
-	# GAME_C = srcs/game_linux.c
+	HOOKS_C = srcs/raycasting/hooks_linux.c
 endif
 
 all: $(NAME)
