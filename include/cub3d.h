@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <math.h>
-# include <sys/time.h>
-#include "../mlx/mlx.h"
+#include <sys/time.h>
+#include "mlx.h"
 
 //SCREEN STUFF
 # define SCREENW				1280
@@ -20,10 +20,13 @@
 //EVENTS
 # define EXIT_KEY 17
 # define MOUSE_MOVE 6
-# define MOUSE_SENSITIVITY 0.05
+# define MOUSE_SENSITIVITY 0.03
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.03
+# define JUMP_HEIGHT 30
+# define GRAVITY_FORCE 0.7
+# define MAX_GRAV 7
 
 //MAC KEYCODES
 // #  define KEY_ESC	53
@@ -53,8 +56,8 @@ struct s_image
 	int		height;
 	int		ceilingpoint;
 	int		floorPoint;
-	int		text_start;
 	int		text_end;
+	int		text_start;
 	double	wallH;
 	int		x_axis;
 	int *data;
@@ -102,6 +105,8 @@ struct s_move
 	int	a;
 	int	s;
 	int	d;
+	int jump;
+	double gravity;
 };
 
 
@@ -121,6 +126,7 @@ struct s_cub
 {
 	t_map map;
 	void *mlx;
+	int		horizon;
 	void *win;
 	char	*fps_str;
 	int		n_renders;
@@ -165,12 +171,12 @@ int all_color(t_data *data);
 void isolate_map (t_map *map);
 int line_nbr(char **map);
 
-
-
 //PLAYER.C
-void init_player_vars(t_cub *cub);
-void add_vars(int x, int y, char **map);
 void	get_player_vars(char **map);
+void add_vars(int x, int y, char **map);
+void init_player_vars(t_cub *cub);
+
+
 
 
 /********************* UTILS **********************/
@@ -232,5 +238,6 @@ void move_w(t_cub *cub);
 void move_a(t_cub *cub);
 void move_s(t_cub *cub);
 void move_d(t_cub *cub);
+void	jump(t_cub *cub);
 
 #endif

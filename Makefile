@@ -34,7 +34,7 @@ else
 	CFLAGS  = -Wall -Werror -Wextra -g $(KEYCODES) -I$(INC) -Iinclude -O3 $(RATES) -Imlx_linux
 	CC = @cc
 	LIBMLX  = mlx_linux
-	LFLAGS += -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -fsanitize=address -g
+	LFLAGS += -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fsanitize=address -g
 	ESC = KEY_ESC=65307
 	W = KEY_W=119
 	A = KEY_A=97
@@ -42,15 +42,14 @@ else
 	D = KEY_D=100
 	R = KEY_R=114
 	Q = KEY_Q=113
-	ESP = KEY_ESPACE=65
+	ESP = KEY_ESPACE=32
 	GRATE = GAME_RATE=100
 	# GAME_C = srcs/game_linux.c
 endif
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@make -C mlx
+$(NAME): $(OBJ) lib
 	$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
 	@echo "$(GREEN)Toma la pah --> $(YELLOW)$(NAME)$(DEFAULT)"
 
@@ -60,8 +59,11 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@make -C mlx clean
+	@make -C $(LIBMLX) clean
 	@echo "$(RED)Byeee, files removed!$(DEFAULT)"
+
+lib:
+	@make -C $(LIBMLX)
 
 re: fclean all
 

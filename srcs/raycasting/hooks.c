@@ -22,9 +22,9 @@ int move_mouse(int x, int y, t_cub *cub)
 	// render(cub);
 
 	// Reset the mouse position to the center of the screen
-	mlx_mouse_move(cub->win, SCREENW / 2, SCREENH / 2);
+	mlx_mouse_move(cub->mlx, cub->win, SCREENW / 2, cub->horizon);
 
-	return 1;
+	return (1);
 }
 
 void rotation(t_player *player, double angle)
@@ -64,7 +64,6 @@ int	key_release(int key, t_cub *cub)
 
 int get_key(int key, t_cub *cub)
 {
-	//printf("pressed\n");
 	if(key == KEY_ESC)
 		free_exit(cub, "Exit was successfull");
 	if(key == KEY_W)
@@ -75,5 +74,9 @@ int get_key(int key, t_cub *cub)
 		cub->player.move.a = 1;
 	if(key == KEY_D)
 		cub->player.move.d = 1;
+	if(key == KEY_ESPACE && !cub->player.move.gravity && !cub->player.move.jump)
+		cub->player.move.jump = JUMP_HEIGHT;
+		//printf("pressed\n");
+	//printf("%d\n", key);
 	return 0;
 }

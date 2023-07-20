@@ -6,11 +6,11 @@ void put_screen(t_cub *cub)
     int groundColor = 0x808080; // Grey color for the ground
 
     // Draw the sky
-    for (int h = 0; h < SCREENH / 2; h++)
+    for (int h = 0; h < cub->horizon; h++)
         my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, skyColor);
 
     // Draw the ground
-    for (int h = SCREENH / 2; h < SCREENH; h++)
+    for (int h = cub->horizon; h < SCREENH; h++)
         my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, groundColor);
 
     // Render the walls
@@ -35,12 +35,12 @@ void get_wall(t_cub *cub, t_ray *ray)
       else  cub->ray.wallx = cub->player.posX + ray->wall_dist * ray->rayDirX;
       cub->ray.wallx -= floor((cub->ray.wallx));
     
-    cub->screen.floorPoint = SCREENH / 2 + cub->screen.wallH / 2;
+    cub->screen.floorPoint = cub->horizon + cub->screen.wallH / 2;
     cub->screen.text_end = cub->screen.floorPoint;
     if (cub->screen.floorPoint >= SCREENH)
         cub->screen.floorPoint = SCREENH - 1;
 
-    cub->screen.ceilingpoint = SCREENH / 2 - cub->screen.wallH / 2;
+    cub->screen.ceilingpoint = cub->horizon - cub->screen.wallH / 2;
     cub->screen.text_start = cub->screen.ceilingpoint;
     if (cub->screen.ceilingpoint < 0)
         cub->screen.ceilingpoint = 0;

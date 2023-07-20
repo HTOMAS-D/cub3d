@@ -10,6 +10,19 @@ int	update_player(t_cub *cub)
 		move_a(cub);
 	if (cub->player.move.d)
 		move_d(cub);
+	if ((cub->player.move.jump && cub->horizon == SCREENH / 2) || (cub->player.move.jump && cub->player.move.jump != JUMP_HEIGHT))
+		jump(cub);
+	if (cub->horizon != SCREENH / 2 && !cub->player.move.jump)
+	{
+		cub->horizon -= (int)cub->player.move.gravity;
+		cub->player.move.gravity += GRAVITY_FORCE;
+		if (cub->player.move.gravity >= MAX_GRAV)
+			cub->player.move.gravity = MAX_GRAV;
+		if (cub->horizon < SCREENH / 2)
+			cub->horizon = SCREENH / 2;
+	}
+	if (cub->horizon == SCREENH / 2)
+		cub->player.move.gravity = 0;
 	return (0);
 }
 
@@ -52,14 +65,10 @@ int game_loop(t_cub* cub) // gaming loop 1-UPDATE GAME (RAYCASTING AND MOVING) 2
 
 int treat_var_get_color(int var, int start)
 {
-	int temp;
 	double size;
 
 	size = cub()->screen.text_end - cub()->screen.text_start;
 	size /= 64;
-	temp = size - floor(size);
-	if (temp >= 1)
-		size++;
 	var -= start;
 	var /= size;
 	return (var);
@@ -70,6 +79,8 @@ int	get_color(t_image *img, int x, int y)
 	char	*dst;
 
 	y = treat_var_get_color(y, cub()->screen.text_start);
+	if (y >= 64)
+		y = 63;
 	x = (int)(cub()->ray.wallx * 64);
 	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 	return (*(unsigned int *) dst);

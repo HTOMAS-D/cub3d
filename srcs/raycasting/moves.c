@@ -45,4 +45,11 @@ void move_d(t_cub *cub)
 	}
 }
 
-
+void	jump(t_cub *cub)
+{
+	cub->horizon += cub->player.move.jump;
+	cub->player.move.jump -= 2;
+	if (cub->player.move.jump < 0)
+		cub->player.move.jump = 0;
+	cub->player.move.gravity = 0;
+}
