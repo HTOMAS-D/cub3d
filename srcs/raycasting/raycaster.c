@@ -2,16 +2,13 @@
 
 void put_screen(t_cub *cub)
 {
-    int skyColor = 0x0000FF;   // Blue color for the sky
-    int groundColor = 0x808080; // Grey color for the ground
-
     // Draw the sky
     for (int h = 0; h < cub->horizon; h++)
-        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, skyColor);
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, cub->map.ceiling);
 
     // Draw the ground
     for (int h = cub->horizon; h < SCREENH; h++)
-        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, groundColor);
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, cub->map.floor);
 
     // Render the walls
     for (int h = cub->screen.ceilingpoint; h <= cub->screen.floorPoint; h++)

@@ -11,7 +11,9 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
 				srcs/parse/player.c srcs/raycasting/img_util.c \
 				$(HOOKS_C) srcs/raycasting/moves.c srcs/utils/ft_itoa.c \
-				srcs/sprites.c
+				srcs/sprites.c srcs/engine.c srcs/fps_counter.c \
+				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
+				srcs/utils/ft_atoi.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include

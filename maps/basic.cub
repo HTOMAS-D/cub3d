@@ -3,8 +3,8 @@ SO ./pics/colorstone.xpm
 WE ./pics/colorstone.xpm
 EA ./pics/colorstone.xpm
 
-F 74,41,41
-C 231,236,249
+F 0,100,0
+C 135,206,250
 
         1111111111111111111111111
         1000000000110000000000001
