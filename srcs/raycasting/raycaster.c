@@ -31,15 +31,15 @@ void get_wall(t_cub *cub, t_ray *ray)
 
     cub->screen.wallH = (int)(SCREENH / wallDist);
 
-    if (cub->ray.side == 0) cub->ray.wallx = cub->player.posY  + ray->wall_dist * ray->rayDirY;
-      else  cub->ray.wallx = cub->player.posX + ray->wall_dist * ray->rayDirX;
-      cub->ray.wallx -= floor((cub->ray.wallx));
-    
+    if (cub->ray.side == 0) 
+        cub->ray.wallx = cub->player.posY  + ray->wall_dist * ray->rayDirY;
+    else  
+        cub->ray.wallx = cub->player.posX + ray->wall_dist * ray->rayDirX;
+    cub->ray.wallx -= floor((cub->ray.wallx));
     cub->screen.floorPoint = cub->horizon + cub->screen.wallH / 2;
     cub->screen.text_end = cub->screen.floorPoint;
     if (cub->screen.floorPoint >= SCREENH)
         cub->screen.floorPoint = SCREENH - 1;
-
     cub->screen.ceilingpoint = cub->horizon - cub->screen.wallH / 2;
     cub->screen.text_start = cub->screen.ceilingpoint;
     if (cub->screen.ceilingpoint < 0)
@@ -110,12 +110,10 @@ void raycaster(t_cub *cub)
             cub->ray.deltaDistX = 1e30;
         else
             cub->ray.deltaDistX = fabs(1 / cub->ray.rayDirX);
-        // cub->ray.deltaDistX = (cub->ray.rayDirX == 0) ? 1e30 : fabs(1 / cub->ray.rayDirX);
         if (cub->ray.rayDirY == 0)
             cub->ray.deltaDistY = 1e30;
         else
             cub->ray.deltaDistY = fabs(1 / cub->ray.rayDirY);
-        // cub->ray.deltaDistY = (cub->ray.rayDirY == 0) ? 1e30 : fabs(1 / cub->ray.rayDirY);
         calc_step(cub, &(cub->ray));
         ray_hit(cub, &(cub->ray));
         get_wall(cub, &(cub->ray));
