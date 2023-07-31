@@ -21,16 +21,17 @@ void put_screen(t_cub *cub)
 
 void get_wall(t_cub *cub, t_ray *ray)
 {
+    double wallDist;
+    
     if (ray->side == 0)
         ray->wall_dist = ray->sidedistX - ray->deltaDistX;
     else
         ray->wall_dist = ray->sidedistY - ray->deltaDistY;
-
-    double wallDist = ray->side == 0 ? (ray->mapX - cub->player.posX + (1 - ray->stepX) / 2) / ray->rayDirX
-                                     : (ray->mapY - cub->player.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
-
+    if (ray->side == 0)
+        wallDist = (ray->mapX - cub->player.posX + (1 - ray->stepX) / 2) / ray->rayDirX;
+    else
+        wallDist = (ray->mapY - cub->player.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
     cub->screen.wallH = (int)(SCREENH / wallDist);
-
     if (cub->ray.side == 0) 
         cub->ray.wallx = cub->player.posY  + ray->wall_dist * ray->rayDirY;
     else  
