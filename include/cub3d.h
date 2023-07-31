@@ -20,7 +20,7 @@
 //EVENTS
 # define EXIT_KEY 17
 # define MOUSE_MOVE 6
-# define MOUSE_SENSITIVITY 0.03
+# define MOUSE_SENSITIVITY 0.05
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define MOVE_SPEED 0.03
