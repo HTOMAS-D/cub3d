@@ -21,7 +21,7 @@ void create_game(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SCREENW, SCREENH, "cub3d");
 	if (!cub->win)
 		free_exit(cub, "mlx_new_window failed");
-	mlx_mouse_hide(cub->mlx, cub->win);
+	mlx_mouse_hide(); //cub->mlx, cub->win
 	init_sprites(cub);
 	init_player_vars(cub);
 	mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub); //SHITS NOT WORKING 1L << 6
