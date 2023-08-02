@@ -1,5 +1,32 @@
 #include "cub3d.h"
 
+int	get_rgb(char *str)
+{
+	char	*temp;
+	int		*i;
+	int		res;
+
+	temp = ft_calloc(4, sizeof(char));
+	i = ft_calloc(5, sizeof(int));
+	if (!temp || !i)
+		return (-1);
+	while (*str && i[4] < 3)
+	{
+		i[0] = 0;
+		while (*str && *str != ',')
+			temp[i[0]++] = *str++;
+		i[++i[4]] = ft_atoi(temp);
+		i[0] = 0;
+		while (temp[i[0]])
+			temp[i[0]++] = 0;
+		str++;
+	}
+	res = convert_rbg(i[1], i[2], i[3]);
+	free(i);
+	free(temp);
+	return (res);
+}
+
 int all_color(t_data *data)
 {
 	if (data->F != 1 || data->C != 1)
@@ -13,15 +40,17 @@ int check_color_letters(char *str)
 	if (str[0] == 'F' && str[1] == ' ')
 	{
 		cub()->map.data.F++;
+		cub()->map.floor = get_rgb(str + 2);
 		return 0;
 	}
 	else if (str[0] == 'C' && str[1] == ' ')
 	{
 		cub()->map.data.C++;
+		cub()->map.ceiling = get_rgb(str + 2);
 		return 0;
 	}
 	else
-		return 1;	
+		return 1;
 }
 
 void get_colors(t_map *map)

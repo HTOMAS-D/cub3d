@@ -66,3 +66,4 @@ void get_player_vars(char **map)
 		free_exit(cub(), "Number of players is not 1");
 	// map[(int)cub()->player.posY][(int)cub()->player.posX] = cub()->player.orientation;
 }
+

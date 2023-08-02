@@ -20,7 +20,7 @@
 //EVENTS
 # define EXIT_KEY 17
 # define MOUSE_MOVE 6
-# define MOUSE_SENSITIVITY 0.03
+# define MOUSE_SENSITIVITY 0.05
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define MOVE_SPEED 0.03
@@ -97,6 +97,8 @@ struct s_map
 	char **img_paths;
 	char **color_str;
 	char **iso_map;
+	int	floor;
+	int	ceiling;
 };
 
 struct s_move
@@ -162,6 +164,9 @@ void get_img(t_map *map);
 int check_path_letters(char *str);
 int letters_check(t_data *data);
 
+//CHECK_WALLS.C
+int	check_walls(t_map *map);
+
 //COLOR_CHECKER.C
 void get_colors(t_map *map);
 int check_color_letters(char *str);
@@ -181,6 +186,12 @@ void init_player_vars(t_cub *cub);
 
 /********************* UTILS **********************/
 
+//FT_ATOI.C
+int	ft_atoi(const char *nptr);
+
+//FT_CALLOC.C
+void	*ft_calloc(size_t nelem, size_t elsize);
+
 //STR_UTILS.C
 int ft_lenstr(char *str);
 char *ft_strrchr(char *str, char c);
@@ -193,6 +204,8 @@ char **ft_split(char *str, char c);
 //FT_ITOA.C
 char *ft_itoa(int nbr);
 
+//RBG_CONVERTER.C
+int	convert_rbg(int r, int g, int b);
 
 /********************** EXIT/FREES **********************/
 
@@ -207,14 +220,19 @@ void free_matrix(char ***matrix);
 void free_stuff(t_cub *cub);
 void free_mlx(t_cub *cub);
 
+//ENGINE.C
+int		render(t_cub *cub);
+int game_loop(t_cub* cub);
 
+//FPS_COUNTER.C
+int	fps_counter(t_cub *cub);
 
+//PLAYER.C
+int	update_player(t_cub *cub);
 
 //IMG_UTIL.C
 int		get_color(t_image *img, int x, int y);
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
-int		render(t_cub *cub);
-int game_loop(t_cub* cub);
 
 //SPRITES.C
 int	init_sprites(t_cub *cub);
