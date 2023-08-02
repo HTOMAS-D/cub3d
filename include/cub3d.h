@@ -164,6 +164,9 @@ void get_img(t_map *map);
 int check_path_letters(char *str);
 int letters_check(t_data *data);
 
+//CHECK_WALLS.C
+int	check_walls(t_map *map);
+
 //COLOR_CHECKER.C
 void get_colors(t_map *map);
 int check_color_letters(char *str);

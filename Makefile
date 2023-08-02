@@ -13,7 +13,7 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				$(HOOKS_C) srcs/raycasting/moves.c srcs/utils/ft_itoa.c \
 				srcs/sprites.c srcs/engine.c srcs/fps_counter.c \
 				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
-				srcs/utils/ft_atoi.c
+				srcs/utils/ft_atoi.c srcs/parse/check_walls.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
