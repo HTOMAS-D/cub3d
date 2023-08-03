@@ -20,6 +20,8 @@ int	get_color(t_image *img, int x, int y)
 		y = 63;
 	x = (int)(cub()->ray.wallx * 64);
 	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
+	if (cub()->ray.side)
+		return (*(unsigned int *) dst / 2);
 	return (*(unsigned int *) dst);
 }
 

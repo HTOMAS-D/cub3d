@@ -16,6 +16,7 @@
 # define MM_W				250
 # define MM_H				250
 # define PI 3.14159
+# define RGB_UNIT			65793
 
 //EVENTS
 # define EXIT_KEY 17
