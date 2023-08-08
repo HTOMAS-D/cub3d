@@ -1,7 +1,7 @@
-NO ./pics/colorstone.xpm
-SO ./pics/colorstone.xpm
-WE ./pics/colorstone.xpm
-EA ./pics/colorstone.xpm
+NO ./pics/colorstone_NO.xpm
+SO ./pics/colorstone_SO.xpm
+WE ./pics/colorstone_WE.xpm
+EA ./pics/colorstone_EA.xpm
 
 F 0,100,0
 C 135,206,250

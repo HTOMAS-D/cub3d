@@ -78,6 +78,7 @@ struct s_ray
 	int stepY;
 	int side;
 	double wallx;
+	int	wallside;
 };
 
 struct s_data
@@ -137,7 +138,10 @@ struct s_cub
 	struct timeval new_time;
 	t_player player;
 	t_image screen;
-	t_image	wall;
+	t_image	wallNO;
+	t_image	wallSO;
+	t_image	wallWE;
+	t_image	wallEA;
 	t_ray ray;
 	int numb_players;
 };
@@ -232,7 +236,7 @@ int	fps_counter(t_cub *cub);
 int	update_player(t_cub *cub);
 
 //IMG_UTIL.C
-int		get_color(t_image *img, int x, int y);
+int		get_color(int x, int y);
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
 
 //SPRITES.C

@@ -15,7 +15,7 @@ void put_screen(t_cub *cub)
     // Render the walls
     h = cub->screen.ceilingpoint -1;
     while (++h < cub->screen.floorPoint)
-        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(&cub->wall, cub->screen.x_axis, h));
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h));
 }
 
 
@@ -58,12 +58,20 @@ void ray_hit(t_cub *cub, t_ray *ray)
             ray->sidedistX += ray->deltaDistX;
             ray->mapX += ray->stepX;
             ray->side = 0;
+            if (ray->stepX < 0)
+                ray->wallside = 0;
+            else
+                ray->wallside = 2;
         }
         else
         {
             ray->sidedistY += ray->deltaDistY;
             ray->mapY += ray->stepY;
             ray->side = 1;
+            if (ray->stepY < 0)
+                ray->wallside = 1;
+            else
+                ray->wallside = 3;
         }
         if (cub->map.iso_map[ray->mapY][ray->mapX] != '0')
             i = 1;
