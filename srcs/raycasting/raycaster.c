@@ -33,17 +33,17 @@ void put_screen(t_cub *cub)
 
 void    get_wizard(t_cub *cub)
 {
-    double  Wizard_dist;
+    //double  Wizard_dist;
 
     if (cub->wizard.side == 0)
         cub->wizard.wizard_dist = cub->wizard.sidedistX - cub->wizard.deltaDistX;
     else
         cub->wizard.wizard_dist = cub->wizard.sidedistY - cub->wizard.deltaDistY;
-    if (cub->wizard.side == 0)
-        Wizard_dist = (cub->wizard.mapX - cub->player.posX + (1 - cub->wizard.stepX) / 2) / cub->ray.rayDirX;
-    else
-        Wizard_dist = (cub->wizard.mapY - cub->player.posY + (1 - cub->wizard.stepY) / 2) / cub->ray.rayDirY;
-    cub->screen.wizH = (int)(SCREENH / Wizard_dist);
+    // if (cub->wizard.side == 0)
+    //     Wizard_dist = (cub->wizard.mapX - cub->player.posX + (1 - cub->wizard.stepX) / 2) / cub->ray.rayDirX;
+    // else
+    //     Wizard_dist = (cub->wizard.mapY - cub->player.posY + (1 - cub->wizard.stepY) / 2) / cub->ray.rayDirY;
+    cub->screen.wizH = (int)(SCREENH / cub->wizard.wizard_dist);
     if (cub->ray.side == 0)
         cub->wizard.wizardx = cub->player.posY  + cub->wizard.wizard_dist * cub->ray.rayDirY;
     else  
