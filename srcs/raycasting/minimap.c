@@ -1,21 +1,5 @@
 #include "cub3d.h"
 
-// # define MM_W				250
-// # define MM_H				250
-
-
-// struct s_player
-// {
-// 	double posX;
-// 	double posY;
-// 	double	dirY;
-// 	double	dirX;
-// 	double	fovX;
-// 	double	fovY;
-// 	char	orientation;
-// 	struct s_move	move;
-// };
-
 void draw_square(t_cub *cub, int pX, int pY, int color)
 {
     int i = -1;
@@ -28,26 +12,34 @@ void draw_square(t_cub *cub, int pX, int pY, int color)
     }
 }
 
+
 void get_map_around(t_cub *cub, char **map)
 {
-    int mY = cub->player.posY - 6;
-    int mX = cub->player.posX - 6;
+    int mY = (int)cub->player.posY - 6;
+    int mX;
     int mapPosY = 10;
-    int mapPosX = 10;
+    int mapPosX;
 
-    while(++mY <= cub->player.posY + 5)
+    while (mY <= (int)cub->player.posY + 5 && mY < cub->map.mapHeight)
     {
-        while(++mX <= cub->player.posX + 5)
+        if (mY >= 0)
         {
-            if(mY >= 0 && mX >= 0 && map[mY][mX] == '1')
+            mX = (int)cub->player.posX - 6;
+            mapPosX = 10;
+
+            while (mX <= (int)cub->player.posX + 5)
             {
-                draw_square(cub, mapPosX, mapPosY, 0x21212b);
+                if (mX >= 0 && mX < ft_lenstr(map[mY]) && map[mY][mX] == '1')
+                    draw_square(cub, mapPosX, mapPosY, 0x21212b);
+                mapPosX += 18; 
+                mX++;
             }
-            mapPosX += 20;
         }
-        mapPosY += 20;
+        mapPosY += 18; 
+        mY++;
     }
 }
+
 
 void get_player(t_cub * cub)
 {
@@ -58,34 +50,34 @@ void get_player(t_cub * cub)
     i = -1;
     startX = 10 + (MM_W / 2) - 10;
     startY = 10 + (MM_H / 2) - 10;
-    while (++i < 20)
+    while (++i < 17)
     {
         j = -1;
-        while (++j < 20)
+        while (++j < 17)
             my_mlx_pixel_put(&cub->screen, startX + j, startY + i, 0xeb1b0c); 
     }
 }
-
-void get_borders(t_cub * cub)
+void get_borders(t_cub *cub)
 {
     int i;
     int j;
 
     i = -1;
     j = -1;
-    while (++i <= MM_W)
+    while (++i <= MM_W - 22)
     {
-        if (i == 0 || i == MM_W)
+        if (i == 0 || i == MM_W - 22)
         {    
-            while(++j <= MM_H)
-                my_mlx_pixel_put(&cub->screen, j+10, i + 10, 0x050303);
+            while (++j <= MM_H - 22) 
+                my_mlx_pixel_put(&cub->screen, j + 10, i + 10, 0x050303);
             j = -1;
         }
-        my_mlx_pixel_put(&cub->screen, 10, i+10, 0x050303);
-        my_mlx_pixel_put(&cub->screen, MM_W + 10, i+10, 0x050303);
+        my_mlx_pixel_put(&cub->screen, 10, i + 10, 0x050303);
+        my_mlx_pixel_put(&cub->screen, MM_W - 22 + 10, i + 10, 0x050303); 
     }
-
 }
+
+
 
 void minimap(t_cub *cub, char **map)
 {

@@ -13,8 +13,8 @@
 //SCREEN STUFF
 # define SCREENW				1280
 # define SCREENH				720
-# define MM_W				220
-# define MM_H				220
+# define MM_W				240
+# define MM_H				240
 # define PI 3.14159
 # define RGB_UNIT			65793
 
@@ -101,6 +101,7 @@ struct s_map
 	char **iso_map;
 	int	floor;
 	int	ceiling;
+	int mapHeight;
 };
 
 struct s_move
