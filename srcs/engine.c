@@ -30,6 +30,7 @@ int	update_game(t_cub *cub)
 int game_loop(t_cub* cub)
 {
 	update_game(cub);
+	minimap(cub, cub->map.iso_map);
 	render(cub);
 	return (0);
 }

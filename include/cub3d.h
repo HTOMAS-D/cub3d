@@ -263,4 +263,8 @@ void move_s(t_cub *cub);
 void move_d(t_cub *cub);
 void	jump(t_cub *cub);
 
+
+//MINIMAP.C
+void minimap(t_cub *cub, char **map);
+
 #endif
