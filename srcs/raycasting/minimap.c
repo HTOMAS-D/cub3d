@@ -16,7 +16,7 @@
 // 	struct s_move	move;
 // };
 
-void draw_square(int pX, int pY, int color)
+void draw_square(t_cub *cub, int pX, int pY, int color)
 {
     int i = -1;
     int j = -1;
@@ -24,23 +24,28 @@ void draw_square(int pX, int pY, int color)
     {
         j = -1;
         while(++j < 20)
-            my_mlx_pixel_put(&cub()->screen, pX + j, pY + i, color); 
+            my_mlx_pixel_put(&cub->screen, pX + j, pY + i, color); 
     }
 }
 
 void get_map_around(t_cub *cub, char **map)
 {
-    int mY = cub->player.posY - 5;
-    int mX = cub->player.posX - 5;
-    while(mY <= cub->player.posY + 5)
-    {
-        while(mX <= cub->player.posX +5)
-        {
-            if[mY >= 0 && mX >= 0 && map[mY][mX] != '0']
-            {
+    int mY = cub->player.posY - 6;
+    int mX = cub->player.posX - 6;
+    int mapPosY = 10;
+    int mapPosX = 10;
 
+    while(++mY <= cub->player.posY + 5)
+    {
+        while(++mX <= cub->player.posX + 5)
+        {
+            if(mY >= 0 && mX >= 0 && map[mY][mX] == '1')
+            {
+                draw_square(cub, mapPosX, mapPosY, 0x21212b);
             }
+            mapPosX += 20;
         }
+        mapPosY += 20;
     }
     
 }

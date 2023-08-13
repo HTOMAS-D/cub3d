@@ -269,6 +269,6 @@ void minimap(t_cub *cub, char **map);
 void get_borders(t_cub *cub);
 void get_player(t_cub *cub);
 void get_map_around(t_cub *cub, char **map);
-void draw_square(int pX, int pY, int color);
+void draw_square(t_cub *cub, int pX, int pY, int color);
 
 #endif
