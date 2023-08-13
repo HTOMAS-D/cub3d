@@ -18,6 +18,7 @@ void isolate_map(t_map *map)
 
 	j = -1;
 	count = line_nbr(&(map->map[8]));
+	map->mapHeight = count;
 	map->iso_map = malloc(sizeof(char *) * (count + 1));
 	if (!map->iso_map)
 		parse_exit(map, "failed to alloc iso_map");
@@ -25,5 +26,4 @@ void isolate_map(t_map *map)
 	i = 7;
 	while (map && map->map[++i])
 		map->iso_map[++j] = ft_strdup(map->map[i]);
-		// printf("%s\n", map->iso_map[j]);
 }

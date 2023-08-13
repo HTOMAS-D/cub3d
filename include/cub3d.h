@@ -13,8 +13,8 @@
 //SCREEN STUFF
 # define SCREENW				1280
 # define SCREENH				720
-# define MM_W				250
-# define MM_H				250
+# define MM_W				240
+# define MM_H				240
 # define PI 3.14159
 # define RGB_UNIT			65793
 
@@ -101,6 +101,7 @@ struct s_map
 	char **iso_map;
 	int	floor;
 	int	ceiling;
+	int mapHeight;
 };
 
 struct s_move
@@ -262,5 +263,13 @@ void move_a(t_cub *cub);
 void move_s(t_cub *cub);
 void move_d(t_cub *cub);
 void	jump(t_cub *cub);
+
+
+//MINIMAP.C
+void minimap(t_cub *cub, char **map);
+void get_borders(t_cub *cub);
+void get_player(t_cub *cub);
+void get_map_around(t_cub *cub, char **map);
+void draw_square(t_cub *cub, int pX, int pY, int color);
 
 #endif
