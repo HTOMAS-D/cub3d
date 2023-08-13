@@ -47,7 +47,6 @@ void get_map_around(t_cub *cub, char **map)
         }
         mapPosY += 20;
     }
-    
 }
 
 void get_player(t_cub * cub)
@@ -92,6 +91,6 @@ void minimap(t_cub *cub, char **map)
 {
     (void) map;
     get_borders(cub);
-    // get_map_around(cub, map);
+    get_map_around(cub, map);
     get_player(cub);
 }
