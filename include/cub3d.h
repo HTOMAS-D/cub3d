@@ -267,5 +267,6 @@ void	jump(t_cub *cub);
 //MINIMAP.C
 void minimap(t_cub *cub, char **map);
 void get_borders(t_cub *cub);
+void get_player(t_cub * cub);
 
 #endif
