@@ -13,8 +13,8 @@
 //SCREEN STUFF
 # define SCREENW				1280
 # define SCREENH				720
-# define MM_W				210
-# define MM_H				210
+# define MM_W				220
+# define MM_H				220
 # define PI 3.14159
 # define RGB_UNIT			65793
 
@@ -269,5 +269,6 @@ void minimap(t_cub *cub, char **map);
 void get_borders(t_cub *cub);
 void get_player(t_cub *cub);
 void get_map_around(t_cub *cub, char **map);
+void draw_square(int pX, int pY, int color);
 
 #endif
