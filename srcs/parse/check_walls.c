@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:53:47 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/02 18:53:32 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:22:43 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	check_walls(t_map *map)
 {
 	int	i;
 	int	j;
+	int	wizard;
 
 	i = -1;
+	wizard = 0;
 	while (map->iso_map[++i])
 	{
 		j = -1;
@@ -51,7 +53,11 @@ int	check_walls(t_map *map)
 		{
 			if (map->iso_map[i][j] != ' ' && map->iso_map[i][j] != '1')
 				check_square(map, i, j);
+			if (map->iso_map[i][j] == 'Z')
+				wizard++;
 		}
 	}
+	if (wizard > 1)
+		parse_exit(map, "Can only be one wizard");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:50:15 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/03 17:54:26 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:51:05 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	render(t_cub *cub)
 int	update_game(t_cub *cub)
 {
 	update_player(cub);
+	update_wizard_animation(cub);
 	raycaster(cub);
 	return (0);
 }

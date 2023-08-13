@@ -13,11 +13,46 @@ void put_screen(t_cub *cub)
     while(++h < SCREENH)
         my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, cub->map.floor);
     // Render the walls
-    h = cub->screen.ceilingpoint -1;
+    h = cub->screen.ceilingpoint - 1;
     while (++h < cub->screen.floorPoint)
-        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h));
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h, 64));
+    // Render Wizard
+    if (!cub->wizard.hit)
+        return ;
+    cub->screen.text_start = cub->wizard.top_point;
+    cub->screen.text_end = cub->wizard.bottom_point;
+    if (cub->wizard.bottom_point >= SCREENH)
+        cub->wizard.bottom_point = SCREENH - 1;
+    if (cub->wizard.top_point < 0)
+        cub->wizard.top_point = 0;
+    h = cub->wizard.top_point - 1;
+    cub->ray.wallside = - 1;
+    while (++h < cub->wizard.bottom_point)
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h, 80));
 }
 
+void    get_wizard(t_cub *cub)
+{
+    double  Wizard_dist;
+
+    if (cub->wizard.side == 0)
+        cub->wizard.wizard_dist = cub->wizard.sidedistX - cub->wizard.deltaDistX;
+    else
+        cub->wizard.wizard_dist = cub->wizard.sidedistY - cub->wizard.deltaDistY;
+    if (cub->wizard.side == 0)
+        Wizard_dist = (cub->wizard.mapX - cub->player.posX + (1 - cub->wizard.stepX) / 2) / cub->ray.rayDirX;
+    else
+        Wizard_dist = (cub->wizard.mapY - cub->player.posY + (1 - cub->wizard.stepY) / 2) / cub->ray.rayDirY;
+    cub->screen.wizH = (int)(SCREENH / Wizard_dist);
+    if (cub->ray.side == 0)
+        cub->wizard.wizardx = cub->player.posY  + cub->wizard.wizard_dist * cub->ray.rayDirY;
+    else  
+        cub->wizard.wizardx = cub->player.posX + cub->wizard.wizard_dist * cub->ray.rayDirX;
+    cub->wizard.wizardx -= floor((cub->wizard.wizardx));
+    cub->wizard.bottom_point = cub->horizon + cub->screen.wizH/ 2;
+    cub->wizard.top_point = cub->horizon - cub->screen.wizH / 2;
+   
+}
 
 void get_wall(t_cub *cub, t_ray *ray)
 {
@@ -50,6 +85,7 @@ void get_wall(t_cub *cub, t_ray *ray)
 
 void ray_hit(t_cub *cub, t_ray *ray)
 {
+    int wizard = 0;
     int i = 0;
     while (i == 0)
     {
@@ -73,8 +109,24 @@ void ray_hit(t_cub *cub, t_ray *ray)
             else
                 ray->wallside = 3;
         }
-        if (cub->map.iso_map[ray->mapY][ray->mapX] != '0')
+        if (cub->map.iso_map[ray->mapY][ray->mapX] != '0' && cub->map.iso_map[ray->mapY][ray->mapX] != 'Z')
             i = 1;
+        else if (!wizard && !cub->wizard.hit && cub->map.iso_map[ray->mapY][ray->mapX] == 'Z')
+        {
+            wizard++;
+            cub->wizard.hit = 1;
+            cub->wizard.sidedistX = ray->sidedistX;
+            cub->wizard.sidedistY = ray->sidedistY;
+            cub->wizard.deltaDistX = ray->deltaDistX;
+            cub->wizard.deltaDistY = ray->deltaDistY;
+            cub->wizard.mapX = ray->mapX;
+            cub->wizard.mapY = ray->mapY;
+            cub->wizard.stepX = ray->stepX;
+            cub->wizard.stepY = ray->stepY;
+            cub->wizard.side = ray->side;
+        }
+        if (!wizard)
+            cub->wizard.hit = 0;
     }
 }
 
@@ -107,6 +159,7 @@ void raycaster(t_cub *cub)
     double viewx;
 
     cub->screen.x_axis = -1;
+    cub->wizard.hit = 0;
     while (++cub->screen.x_axis < SCREENW)
     {
         // Calculate ray position and direction
@@ -126,6 +179,8 @@ void raycaster(t_cub *cub)
         calc_step(cub, &(cub->ray));
         ray_hit(cub, &(cub->ray));
         get_wall(cub, &(cub->ray));
+        if (cub->wizard.hit)
+            get_wizard(cub);
         put_screen(cub);
     }
 }

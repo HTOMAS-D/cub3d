@@ -53,7 +53,7 @@ void get_player_vars(char **map)
 			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' ||
 				map[y][x] == 'W')
 				add_vars(x, y, map);
-			else if (!(map[y][x] == '1' || map[y][x] == '0' || map[y][x] == ' '))
+			else if (!(map[y][x] == '1' || map[y][x] == '0' || map[y][x] == ' ' || map[y][x] == 'Z'))
 				free_exit(cub(), "Invalid character on map file");
 		}
 	}

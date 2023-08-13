@@ -1,7 +1,7 @@
-NO ./pics/purplestone_NO.xpm
-SO ./pics/purplestone_SO.xpm
-WE ./pics/purplestone_WE.xpm
-EA ./pics/purplestone_EA.xpm
+NO ./pics/colorstone_NO.xpm
+SO ./pics/colorstone_SO.xpm
+WE ./pics/colorstone_WE.xpm
+EA ./pics/colorstone_EA.xpm
 
 F 0,60,0
 C 25,25,112
