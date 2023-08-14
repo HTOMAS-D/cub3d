@@ -33,8 +33,10 @@ void put_screen(t_cub *cub)
 
 void    get_wizard(t_cub *cub)
 {
-    //double  Wizard_dist;
+    // double  Wizard_dist;
 
+    // if (!cub->wizard.hit)
+    //     return ;
     if (cub->wizard.side == 0)
         cub->wizard.wizard_dist = cub->wizard.sidedistX - cub->wizard.deltaDistX;
     else
@@ -44,14 +46,15 @@ void    get_wizard(t_cub *cub)
     // else
     //     Wizard_dist = (cub->wizard.mapY - cub->player.posY + (1 - cub->wizard.stepY) / 2) / cub->ray.rayDirY;
     cub->screen.wizH = (int)(SCREENH / cub->wizard.wizard_dist);
-    if (cub->ray.side == 0)
-        cub->wizard.wizardx = cub->player.posY  + cub->wizard.wizard_dist * cub->ray.rayDirY;
-    else  
-        cub->wizard.wizardx = cub->player.posX + cub->wizard.wizard_dist * cub->ray.rayDirX;
+    // (void)Wizard_dist;
+    // if (cub->ray.side == 0)
+    //     cub->wizard.wizardx = cub->player.posY  + cub->wizard.wizard_dist * cub->ray.rayDirY;
+    // else  
+        cub->wizard.wizardx = (cub->player.posX + cub->wizard.wizard_dist * cub->ray.rayDirX);
+        // cub->wizard.wizardx = ((cub->player.posX + cub->wizard.wizard_dist * cub->ray.rayDirX) + (cub->player.posY  + cub->wizard.wizard_dist * cub->ray.rayDirY) / 2);
     cub->wizard.wizardx -= floor((cub->wizard.wizardx));
-    cub->wizard.bottom_point = cub->horizon + cub->screen.wizH/ 2;
+    cub->wizard.bottom_point = cub->horizon + cub->screen.wizH / 2;
     cub->wizard.top_point = cub->horizon - cub->screen.wizH / 2;
-   
 }
 
 void get_wall(t_cub *cub, t_ray *ray)
@@ -85,8 +88,8 @@ void get_wall(t_cub *cub, t_ray *ray)
 
 void ray_hit(t_cub *cub, t_ray *ray)
 {
-    int wizard = 0;
     int i = 0;
+    int w = 0;
     while (i == 0)
     {
         if (ray->sidedistX < ray->sidedistY)
@@ -111,23 +114,27 @@ void ray_hit(t_cub *cub, t_ray *ray)
         }
         if (cub->map.iso_map[ray->mapY][ray->mapX] != '0' && cub->map.iso_map[ray->mapY][ray->mapX] != 'Z')
             i = 1;
-        else if (!wizard && !cub->wizard.hit && cub->map.iso_map[ray->mapY][ray->mapX] == 'Z')
+        else if (cub->map.iso_map[ray->mapY][ray->mapX] == 'Z')
         {
-            wizard++;
-            cub->wizard.hit = 1;
-            cub->wizard.sidedistX = ray->sidedistX;
-            cub->wizard.sidedistY = ray->sidedistY;
-            cub->wizard.deltaDistX = ray->deltaDistX;
-            cub->wizard.deltaDistY = ray->deltaDistY;
-            cub->wizard.mapX = ray->mapX;
-            cub->wizard.mapY = ray->mapY;
-            cub->wizard.stepX = ray->stepX;
-            cub->wizard.stepY = ray->stepY;
-            cub->wizard.side = ray->side;
+            w++;
+            if (!cub->wizard.hit)
+            {
+                //printf("entrou\n");
+                cub->wizard.sidedistX = ray->sidedistX;
+                cub->wizard.sidedistY = ray->sidedistY;
+                cub->wizard.deltaDistX = ray->deltaDistX;
+                cub->wizard.deltaDistY = ray->deltaDistY;
+                cub->wizard.mapX = ray->mapX;
+                cub->wizard.mapY = ray->mapY;
+                cub->wizard.stepX = ray->stepX;
+                cub->wizard.stepY = ray->stepY;
+                cub->wizard.side = ray->side;
+                cub->wizard.hit = 1;
+            }
         }
-        if (!wizard)
-            cub->wizard.hit = 0;
     }
+    if (!w)
+        cub->wizard.hit = 0;
 }
 
 void calc_step(t_cub *cub, t_ray *ray)
@@ -183,4 +190,5 @@ void raycaster(t_cub *cub)
             get_wizard(cub);
         put_screen(cub);
     }
+    // exit(1);
 }

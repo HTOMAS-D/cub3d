@@ -41,8 +41,8 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 {
 	char	*dst;
 
-	if (color == TRANSPARENT)
-		return ;
+	// if (color == TRANSPARENT)
+	// 	return ;
 	dst = (image->addr + (y * image->size_line + x * (image->bpp / 8)));
 	*(unsigned int *)dst = color;
 }
