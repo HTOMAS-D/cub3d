@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:50:15 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/16 16:01:07 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:11:26 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	render(t_cub *cub)
 	fps_counter(cub);
 	if (cub->press_f && !cub->door.animation.frame)
 		print_phrase(cub, "Press F to open");
+	if (cub->press_f && cub->door.animation.frame == cub->door.animation.max)
+		print_phrase(cub, "Press F to close");
 	cub->n_renders++;
 	return (0);
 }

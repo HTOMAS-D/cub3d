@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:36:30 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/16 16:05:38 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:10:39 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	update_door_animation(t_cub *cub)
 	static double	fps;
 	double			time;
 
-	if (cub->door.x < 0 || cub->door.hp || (!cub->door.hp && cub->door.animation.frame == cub->door.animation.max))
+	if (cub->door.x < 0 || (!cub->door.hp && cub->door.animation.frame == cub->door.animation.max) || (cub->door.hp && cub->door.animation.frame == 0))
 		return (0);
 	if (!i)
 		i = 1;
@@ -36,6 +36,8 @@ int	update_door_animation(t_cub *cub)
 	{
 		gettimeofday(&cub->door.animation.old_time, NULL);
 		cub->door.animation.frame += i;
+		if (cub->door.animation.frame == cub->door.animation.max || cub->door.animation.frame == 0)
+			i *= -1;
 	}
 	return(0);
 }

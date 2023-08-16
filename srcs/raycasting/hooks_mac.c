@@ -75,7 +75,12 @@ int get_key(int key, t_cub *cub)
 	if(key == KEY_D)
 		cub->player.move.d = 1;
 	if (key == KEY_F && cub->door.x >= 0 && cub->press_f)
-		cub->door.hp = 0;
+	{
+		if (cub->door.hp)
+			cub->door.hp = 0;
+		else
+			cub->door.hp = 1;
+	}
 	//if(key == KEY_ESPACE && !cub->player.move.gravity && !cub->player.move.jump)
 		//cub->player.move.jump = JUMP_HEIGHT;
 		//printf("pressed\n");
