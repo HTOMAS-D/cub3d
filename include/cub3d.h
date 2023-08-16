@@ -17,6 +17,7 @@
 # define MM_H				240
 # define PI 3.14159
 # define RGB_UNIT			65793
+# define TRANSPARENT		3817537
 
 //EVENTS
 # define EXIT_KEY 17
@@ -45,7 +46,6 @@ typedef struct s_player t_player;
 typedef struct s_ray t_ray;
 typedef struct s_image t_image;
 
-
 struct s_image
 {
 	void	*ptr;
@@ -60,11 +60,25 @@ struct s_image
 	int		text_end;
 	int		text_start;
 	double	wallH;
+	double	wizH;
 	int		x_axis;
 	int *data;
 };
+
+struct s_animation
+{
+	struct timeval old_time;
+	struct timeval new_time;
+	struct s_image	img;
+	int				frame;
+	int				max;
+	int				size;
+
+};
+
 struct s_ray
 {
+	int hit;
 	double rayDirX;
 	double rayDirY;
 	double deltaDistX;
@@ -79,6 +93,17 @@ struct s_ray
 	int side;
 	double wallx;
 	int	wallside;
+};
+
+struct s_object
+{
+	int		hp;
+	double	x;
+	double	y;
+	double	printx;
+	double	printy;	
+	t_ray	ray;
+	struct s_animation	animation;
 };
 
 struct s_data
@@ -137,13 +162,17 @@ struct s_cub
 	int		n_renders;
 	struct timeval old_time;
 	struct timeval new_time;
+	double	*ZBuffer;
 	t_player player;
 	t_image screen;
 	t_image	wallNO;
 	t_image	wallSO;
 	t_image	wallWE;
 	t_image	wallEA;
-	t_ray ray;
+	t_ray		ray;
+	int			press_f;
+	struct s_object	wizard;
+	struct s_object	door;
 	int numb_players;
 };
 
@@ -237,8 +266,9 @@ int	fps_counter(t_cub *cub);
 int	update_player(t_cub *cub);
 
 //IMG_UTIL.C
-int		get_color(int x, int y);
+int		get_color(int x, int y, int size);
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+int 	check_color(int x, int y, int size, t_image *img);
 
 //SPRITES.C
 int	init_sprites(t_cub *cub);
@@ -256,6 +286,15 @@ void rotation(t_player *player, double move);
 int	key_release(int key, t_cub *cub);
 int get_key(int key, t_cub *cub);
 
+//ANIMATIONS.C
+int	update_wizard_animation(t_cub *cub);
+int	update_door_animation(t_cub *cub);
+
+//OBJECT.C
+int		init_object(t_cub *cub);
+void	print_object(t_cub *cub);
+int		press_f(t_cub *cub);
+int		print_phrase(t_cub *cub, char *str);
 
 //MOVES.C
 void move_w(t_cub *cub);

@@ -26,6 +26,8 @@ void free_exit(t_cub *cub, char *str)
         free_matrix(&(cub->map.img_paths));
     if (cub->map.iso_map)
         free_matrix(&(cub->map.iso_map));
+    if (cub->ZBuffer)
+        free(cub->ZBuffer);
     free_mlx(cub);
     ez_exit(str);
 }

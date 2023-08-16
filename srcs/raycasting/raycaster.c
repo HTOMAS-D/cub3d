@@ -13,11 +13,60 @@ void put_screen(t_cub *cub)
     while(++h < SCREENH)
         my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, cub->map.floor);
     // Render the walls
-    h = cub->screen.ceilingpoint -1;
+    h = cub->screen.ceilingpoint - 1;
     while (++h < cub->screen.floorPoint)
-        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h));
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h, 64));
+    // Render Door
+    if (!cub->door.ray.hit)
+        return ;
+    cub->screen.text_start = cub->door.printx; //top
+    cub->screen.text_end = cub->door.printy; //bottom 
+    if (cub->door.printy >= SCREENH)
+        cub->door.printy = SCREENH - 1;
+    if (cub->door.printx < 0)
+        cub->door.printx = 0;
+    h = cub->door.printx -1;
+    cub->ray.wallside = cub->door.ray.wallside;
+    cub->ray.wallx = cub->door.ray.wallx;
+    while (++h < cub->door.printy)
+    {
+        if (!check_color(cub->screen.x_axis, h, 89, &cub->door.animation.img))
+            my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h, 64));
+    }
+    cub->ray.wallside = -2;
+    h = cub->door.printx -1;
+    //printf("%f %f\n", cub->door.printx, cub->door.printy);
+    while (++h < cub->door.printy)
+        my_mlx_pixel_put(&cub->screen, cub->screen.x_axis, h, get_color(cub->screen.x_axis, h, 89));
+    //exit(1);
 }
 
+void get_door(t_cub *cub, t_ray *ray)
+{
+    double wallDist;
+    double  doorH;
+    
+    if (!cub->door.ray.hit)
+        return ;
+    if (ray->side == 0)
+        ray->wall_dist = ray->sidedistX - ray->deltaDistX;
+    else
+        ray->wall_dist = ray->sidedistY - ray->deltaDistY;
+    if (ray->side == 0)
+        wallDist = (ray->mapX - cub->player.posX + (1 - ray->stepX) / 2) / ray->rayDirX;
+    else
+        wallDist = (ray->mapY - cub->player.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
+    doorH = (int)(SCREENH / wallDist);
+    if (ray->side == 0) 
+        ray->wallx = cub->player.posY + ray->wall_dist * ray->rayDirY;
+    else
+        ray->wallx = cub->player.posX + ray->wall_dist * ray->rayDirX;
+    ray->wallx -= floor((ray->wallx));
+    cub->door.printy = cub->horizon + doorH / 2; //floor point
+    cub->door.printx = cub->horizon - doorH / 2;
+    if (cub->door.hp)
+        cub->ZBuffer[cub->screen.x_axis] = ray->wall_dist;
+}
 
 void get_wall(t_cub *cub, t_ray *ray)
 {
@@ -45,12 +94,15 @@ void get_wall(t_cub *cub, t_ray *ray)
     cub->screen.text_start = cub->screen.ceilingpoint;
     if (cub->screen.ceilingpoint < 0)
         cub->screen.ceilingpoint = 0;
+    cub->ZBuffer[cub->screen.x_axis] = ray->wall_dist;
 }
 
 
 void ray_hit(t_cub *cub, t_ray *ray)
 {
     int i = 0;
+    int d = 0;
+
     while (i == 0)
     {
         if (ray->sidedistX < ray->sidedistY)
@@ -73,9 +125,29 @@ void ray_hit(t_cub *cub, t_ray *ray)
             else
                 ray->wallside = 3;
         }
-        if (cub->map.iso_map[ray->mapY][ray->mapX] != '0')
+        if (cub->map.iso_map[ray->mapY][ray->mapX] == '1')
             i = 1;
+        else if (cub->map.iso_map[ray->mapY][ray->mapX] == 'D')
+        {
+            d++;
+            cub->ray.hit = 1;
+            cub->door.ray.hit = 1;
+            cub->door.ray.rayDirX = ray->rayDirX;
+            cub->door.ray.rayDirY = ray->rayDirY;
+            cub->door.ray.sidedistX = ray->sidedistX;
+            cub->door.ray.sidedistY = ray->sidedistY;
+            cub->door.ray.deltaDistX = ray->deltaDistX;
+            cub->door.ray.deltaDistY = ray->deltaDistY;
+            cub->door.ray.mapX = ray->mapX;
+            cub->door.ray.mapY = ray->mapY;
+            cub->door.ray.stepX = ray->stepX;
+            cub->door.ray.stepY = ray->stepY;
+            cub->door.ray.side = ray->side;
+            cub->door.ray.wallside = ray->wallside;
+        }
     }
+    if (!d)
+        cub->door.ray.hit = 0;
 }
 
 void calc_step(t_cub *cub, t_ray *ray)
@@ -107,6 +179,17 @@ void raycaster(t_cub *cub)
     double viewx;
 
     cub->screen.x_axis = -1;
+    cub->ray.hit = 0;
+    // int y = -1;
+    // int x;
+    // while (cub->map.iso_map[++y])
+    // {
+    //     x = -1;
+    //     while (cub->map.iso_map[y][++x])
+    //         printf("%c", cub->map.iso_map[y][x]);
+    //     printf("\n");
+    // }
+    // exit(1);
     while (++cub->screen.x_axis < SCREENW)
     {
         // Calculate ray position and direction
@@ -126,6 +209,10 @@ void raycaster(t_cub *cub)
         calc_step(cub, &(cub->ray));
         ray_hit(cub, &(cub->ray));
         get_wall(cub, &(cub->ray));
+        get_door(cub, &(cub->door.ray));
+        // if (cub->wizard.hit)
+        //     get_wizard(cub);
         put_screen(cub);
     }
+    print_object(cub);
 }
