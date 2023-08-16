@@ -2,7 +2,7 @@ NAME    = cub3d
 UNAME   := $(shell uname)
 LFLAGS  =  -L$(LIBMLX)
 OBJ     = $(SRC:%.c=%.o)
-KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP)
+KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP) -D $(F)
 RATES	= -D $(GRATE)
 SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
@@ -13,7 +13,8 @@ SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				$(HOOKS_C) srcs/raycasting/moves.c srcs/utils/ft_itoa.c \
 				srcs/sprites.c srcs/engine.c srcs/fps_counter.c \
 				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
-				srcs/utils/ft_atoi.c srcs/parse/check_walls.c srcs/animations.c
+				srcs/utils/ft_atoi.c srcs/parse/check_walls.c srcs/animations.c \
+				srcs/object.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
@@ -26,6 +27,7 @@ ifeq ($(UNAME), Darwin)
 	A = KEY_A=0
 	S = KEY_S=1
 	D = KEY_D=2
+	F = KEY_F=3
 	R = KEY_R=15
 	Q = KEY_Q=12
 	ESP = KEY_ESPACE=49
@@ -43,6 +45,7 @@ else
 	S = KEY_S=115
 	D = KEY_D=100
 	R = KEY_R=114
+	F = KEY_F=3
 	Q = KEY_Q=113
 	ESP = KEY_ESPACE=32
 	GRATE = GAME_RATE=100

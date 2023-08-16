@@ -6,11 +6,39 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:36:30 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/12 18:39:18 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:05:38 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	update_door_animation(t_cub *cub)
+{
+	static int		i;
+	static double	fps;
+	double			time;
+
+	if (cub->door.x < 0 || cub->door.hp || (!cub->door.hp && cub->door.animation.frame == cub->door.animation.max))
+		return (0);
+	if (!i)
+		i = 1;
+	if (!fps)
+		gettimeofday(&cub->door.animation.old_time, NULL);
+	fps = 1.0 / (cub->door.animation.max / 0.7);
+	gettimeofday(&cub->door.animation.new_time, NULL);
+	time = (cub->door.animation.new_time.tv_sec - cub->door.animation.old_time.tv_sec);
+	time += (double)(cub->door.animation.new_time.tv_usec - cub->door.animation.old_time.tv_usec) / 1000000;
+	//printf("%d - %d = %d / 1000000 = %f\n", cub->door.animation.new_time.tv_usec, cub->door.animation.old_time.tv_usec, cub->door.animation.new_time.tv_usec - cub->door.animation.old_time.tv_usec, (double)(cub->door.animation.new_time.tv_usec - cub->door.animation.old_time.tv_usec) / 1000000);
+	// printf("{new} = %ld.%d\n", cub->door.animation.new_time.tv_sec, cub->door.animation.new_time.tv_usec);
+	// printf("{old} = %ld.%d\n", cub->door.animation.old_time.tv_sec, cub->door.animation.old_time.tv_usec);
+	//printf("%f < %f\n", time, fps);
+	if (time > fps)
+	{
+		gettimeofday(&cub->door.animation.old_time, NULL);
+		cub->door.animation.frame += i;
+	}
+	return(0);
+}
 
 int	update_wizard_animation(t_cub *cub)
 {
@@ -18,6 +46,8 @@ int	update_wizard_animation(t_cub *cub)
 	static double	fps;
 	double			time;
 
+	if (!cub->wizard.hp || cub->wizard.x < 0)
+		return (0);
 	if (!i)
 		i = 1;
 	if (!fps)
