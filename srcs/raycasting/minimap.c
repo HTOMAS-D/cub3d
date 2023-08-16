@@ -31,6 +31,8 @@ void get_map_around(t_cub *cub, char **map)
             {
                 if (mX >= 0 && mX < ft_lenstr(map[mY]) && map[mY][mX] == '1')
                     draw_square(cub, mapPosX, mapPosY, 0x21212b);
+                else if (mX >= 0 && mX < ft_lenstr(map[mY]))
+                    draw_square(cub, mapPosX, mapPosY, 0xffffff);
                 mapPosX += 18; 
                 mX++;
             }
@@ -48,12 +50,12 @@ void get_player(t_cub * cub)
     int startX;
     int startY;
     i = -1;
-    startX = 10 + (MM_W / 2) - 10;
-    startY = 10 + (MM_H / 2) - 10;
-    while (++i < 17)
+    startX = 10 + (MM_W / 2) - 11;
+    startY = 10 + (MM_H / 2) - 11;
+    while (++i < 16)
     {
         j = -1;
-        while (++j < 17)
+        while (++j < 16)
             my_mlx_pixel_put(&cub->screen, startX + j, startY + i, 0xeb1b0c); 
     }
 }
