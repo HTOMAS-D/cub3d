@@ -41,7 +41,7 @@ int	get_rgb(char *str)
 
 int	all_color(t_data *data)
 {
-	if (data->f != 1 || data->C != 1)
+	if (data->f != 1 || data->c != 1)
 		return (1);
 	else
 		return (0);
@@ -57,7 +57,7 @@ int	check_color_letters(char *str)
 	}
 	else if (str[0] == 'C' && str[1] == ' ')
 	{
-		cub()->map.data.C++;
+		cub()->map.data.c++;
 		cub()->map.ceiling = get_rgb(str + 2);
 		return (0);
 	}
