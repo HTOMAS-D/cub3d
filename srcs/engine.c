@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:50:15 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 16:51:33 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:37:11 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	update_game(t_cub *cub)
 	return (0);
 }
 
-int game_loop(t_cub* cub)
+int	game_loop(t_cub *cub)
 {
 	update_game(cub);
 	render(cub);

@@ -66,13 +66,10 @@ int	ft_nextclean(char *stash)
 		}
 		stash[i++] = 0;
 	}
-	if (nl_flag)
+	while (nl_flag && stash[i])
 	{
-		while (stash[i])
-		{
-			stash[j++] = stash[i];
-			stash[i++] = 0;
-		}
+		stash[j++] = stash[i];
+		stash[i++] = 0;
 	}
 	return (nl_flag);
 }
