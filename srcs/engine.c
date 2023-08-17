@@ -36,7 +36,7 @@ int	update_game(t_cub *cub)
 	return (0);
 }
 
-int game_loop(t_cub* cub)
+int	game_loop(t_cub *cub)
 {
 	update_game(cub);
 	render(cub);
@@ -53,7 +53,8 @@ int	update_player(t_cub *cub)
 		move_a(cub);
 	if (cub->player.move.d)
 		move_d(cub);
-	if ((cub->player.move.jump && cub->horizon == SCREENH / 2) || (cub->player.move.jump && cub->player.move.jump != JUMP_HEIGHT))
+	if ((cub->player.move.jump && cub->horizon == SCREENH / 2) || 
+		(cub->player.move.jump && cub->player.move.jump != JUMP_HEIGHT))
 		jump(cub);
 	if (cub->horizon != SCREENH / 2 && !cub->player.move.jump)
 	{
