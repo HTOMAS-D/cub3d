@@ -4,7 +4,7 @@ LFLAGS  =  -L$(LIBMLX)
 OBJ     = $(SRC:%.c=%.o)
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP) -D $(F)
 RATES	= -D $(GRATE)
-SRC     =	srcs/main.c srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
+SRC     =	$(MAIN_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
 				srcs/utils/str_utils.c srcs/utils/ft_split.c srcs/exit/frees.c	\
 				srcs/parse/map_checker.c srcs/raycasting/raycaster.c \
@@ -33,6 +33,7 @@ ifeq ($(UNAME), Darwin)
 	ESP = KEY_ESPACE=49
 	GRATE = GAME_RATE=17
 	HOOKS_C = srcs/raycasting/hooks_mac.c
+	MAIN_C = srcs/main_mac.c
 else
 	INC	= /usr/include
 	CFLAGS  = -Wall -Werror -Wextra -g $(KEYCODES) -I$(INC) -Iinclude -O3 $(RATES) -Imlx_linux
@@ -45,11 +46,12 @@ else
 	S = KEY_S=115
 	D = KEY_D=100
 	R = KEY_R=114
-	F = KEY_F=3
+	F = KEY_F=102
 	Q = KEY_Q=113
 	ESP = KEY_ESPACE=32
 	GRATE = GAME_RATE=100
 	HOOKS_C = srcs/raycasting/hooks_linux.c
+	MAIN_C = srcs/main_linux.c
 endif
 
 all: $(NAME)

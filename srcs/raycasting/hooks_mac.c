@@ -1,78 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks_mac.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 15:55:11 by mtiago-s          #+#    #+#             */
+/*   Updated: 2023/08/17 16:10:22 by mtiago-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int close_game(t_cub *cub)
+struct s_rotation
+{
+	double	radians;
+	double	cos_angle;
+	double	sin_angle;
+	double	new_dirx;
+	double	new_diry;
+	double	new_fovx;
+	double	new_fovy;
+}			t_rotation;
+
+
+int	close_game(t_cub *cub)
 {
 	free_exit(cub, "Exit was successfull");
-	return 0;
+	return (0);
 }
 
-int move_mouse(int x, int y, t_cub *cub)
+int	move_mouse(int x, int y, t_cub *cub)
 {
-	// if (cub->game_won)
-	// 	return 0;
+	int	move_x;
 
-	// Calculate the mouse movement in the X direction
-	int move_x = x - (SCREENW / 2);
+	move_x = x - (SCREENW / 2);
 	(void) y;
-	// Rotate the player's view based on the mouse movement
 	rotation(&(cub->player), MOUSE_SENSITIVITY * move_x);
-
-	// Update the raycasting and render the scene
-	// raycaster(cub);
-	// render(cub);
-
-	// Reset the mouse position to the center of the screen
 	mlx_mouse_move(cub->win, SCREENW / 2, cub->horizon);
-
 	return (1);
 }
 
-void rotation(t_player *player, double angle)
+void	rotation(t_player *player, double angle)
 {
-    // Convert the angle from degrees to radians
-    double radians = angle * (M_PI / 180.0);
+	struct s_rotation	data;
 
-    // Compute the sine and cosine of the angle
-    double cosAngle = cos(radians);
-    double sinAngle = sin(radians);
-
-    // Rotate the player's direction vector
-    double newDirX = player->dirX * cosAngle - player->dirY * sinAngle;
-    double newDirY = player->dirX * sinAngle + player->dirY * cosAngle;
-    player->dirX = newDirX;
-    player->dirY = newDirY;
-
-    // Rotate the player's FOV vector
-    double newFovX = player->fovX * cosAngle - player->fovY * sinAngle;
-    double newFovY = player->fovX * sinAngle + player->fovY * cosAngle;
-    player->fovX = newFovX;
-    player->fovY = newFovY;
+	data.radians = angle * (M_PI / 180.0);
+	data.cos_angle = cos(data.radians);
+	data.sin_angle = sin(data.radians);
+	data.new_dirx = player->dirX * data.cos_angle - player->dirY * \
+	data.sin_angle;
+	data.new_diry = player->dirX * data.sin_angle + player->dirY * \
+	data.cos_angle;
+	player->dirX = data.new_dirx;
+	player->dirY = data.new_diry;
+	data.new_fovx = player->fovX * data.cos_angle - player->fovY * \
+	data.sin_angle;
+	data.new_fovy = player->fovX * data.sin_angle + player->fovY * \
+	data.cos_angle;
+	player->fovX = data.new_fovx;
+	player->fovY = data.new_fovy;
 }
 
 int	key_release(int key, t_cub *cub)
 {
-	if(key == KEY_W)
+	if (key == KEY_W)
 		cub->player.move.w = 0;
-	if(key == KEY_S)
+	if (key == KEY_S)
 		cub->player.move.s = 0;
-	if(key == KEY_A)
+	if (key == KEY_A)
 		cub->player.move.a = 0;
-	if(key == KEY_D)
+	if (key == KEY_D)
 		cub->player.move.d = 0;
 	return (0);
 }
 
-int get_key(int key, t_cub *cub)
+int	get_key(int key, t_cub *cub)
 {
-	if(key == KEY_ESC)
+	if (key == KEY_ESC)
 		free_exit(cub, "Exit was successfull");
-	if(key == KEY_W)
+	if (key == KEY_W)
 		cub->player.move.w = 1;
-	if(key == KEY_S)
+	if (key == KEY_S)
 		cub->player.move.s = 1;
-	if(key == KEY_A)
+	if (key == KEY_A)
 		cub->player.move.a = 1;
-	if(key == KEY_D)
+	if (key == KEY_D)
 		cub->player.move.d = 1;
 	if (key == KEY_F && cub->door.x >= 0 && cub->press_f)
 	{
@@ -81,9 +94,5 @@ int get_key(int key, t_cub *cub)
 		else
 			cub->door.hp = 1;
 	}
-	//if(key == KEY_ESPACE && !cub->player.move.gravity && !cub->player.move.jump)
-		//cub->player.move.jump = JUMP_HEIGHT;
-		//printf("pressed\n");
-	// printf("%d\n", key);
-	return 0;
+	return (0);
 }

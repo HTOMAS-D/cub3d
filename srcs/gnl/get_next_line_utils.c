@@ -37,24 +37,24 @@ char	*ft_join(char *line, char *stash)
 
 int ft_nextclean(char *stash)
 {
-    int nl_flag = 0;
-    int i;
-	int j;
+	int	nl_flag;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
 
-    while (stash[i])
-    {
-        if (stash[i] == '\n')
-        {
-            nl_flag = 1;
+	while (stash[i])
+	{
+		if (stash[i] == '\n')
+		{
+			nl_flag = 1;
 			stash[i++] = 0;
-            break;
-        }
+			break ;
+		}
 		stash[i++] = 0;
-    }
-   	if (nl_flag)
+	}
+	if (nl_flag)
 	{
 		while (stash[i])
 		{

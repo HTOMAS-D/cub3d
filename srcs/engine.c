@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:50:15 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/16 18:11:26 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:43:52 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	render(t_cub *cub)
 	raycaster(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.ptr, 0, 0);
 	fps_counter(cub);
+	minimap(cub, cub->map.iso_map);
 	if (cub->press_f && !cub->door.animation.frame)
 		print_phrase(cub, "Press F to open");
 	if (cub->press_f && cub->door.animation.frame == cub->door.animation.max)
@@ -38,7 +39,6 @@ int	update_game(t_cub *cub)
 int game_loop(t_cub* cub)
 {
 	update_game(cub);
-	minimap(cub, cub->map.iso_map);
 	render(cub);
 	return (0);
 }

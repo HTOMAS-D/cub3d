@@ -1,14 +1,26 @@
-#ifndef CUB3D_H
-#define CUB3D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 16:01:23 by mtiago-s          #+#    #+#             */
+/*   Updated: 2023/08/17 16:01:36 by mtiago-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "macros.h"
-#include "string.h"
-#include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <math.h>
-#include <sys/time.h>
-#include "mlx.h"
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# include "macros.h"
+# include "string.h"
+# include "get_next_line.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <math.h>
+# include <sys/time.h>
+# include "mlx.h"
 
 //SCREEN STUFF
 # define SCREENW				1280
@@ -26,7 +38,7 @@
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define MOVE_SPEED 0.03
-# define JUMP_HEIGHT 30
+# define JUMP_HEIGHT 3
 # define GRAVITY_FORCE 0.7
 # define MAX_GRAV 7
 
