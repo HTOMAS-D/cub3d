@@ -45,9 +45,9 @@ int	hex_index(char c)
 
 int	convert_hex_to_dec(char *str)
 {
-	int size;
+	int	size;
 	int	i;
-	int res;
+	int	res;
 
 	str += 2;
 	size = ft_strlen(str) - 1;
@@ -65,7 +65,7 @@ int	convert_rbg(int r, int g, int b)
 {
 	char	*str;
 	int		res;
-	
+
 	check_rgb(r, g, b);
 	str = calloc(9, sizeof(char));
 	str[0] = '0';

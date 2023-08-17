@@ -203,7 +203,7 @@ void check_scene(char *str);
 
 //MAP.C
 void get_map(t_cub *cub, char *file);
-int count_map(int fd);
+int count_map(char *file, t_cub *cub);
 
 //MAP_CHECKER.C
 void check_map(t_map *map);

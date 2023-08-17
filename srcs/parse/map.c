@@ -12,20 +12,24 @@
 
 #include "cub3d.h"
 
-int	count_map(int fd)
+int	count_map(char *file, t_cub *cub)
 {
 	char	*line;
 	int		count;
 
 	count = 0;
+	cub->map.fd = open(file, O_RDONLY);
+	if (cub->map.fd < 0)
+		ez_exit("Error opening the file");
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(cub->map.fd);
 		if (!line)
 			break ;
 		count++;
 		free_array(line);
 	}
+	close(cub->map.fd);
 	return (count);
 }
 
@@ -35,11 +39,7 @@ void	get_map(t_cub *cub, char *file)
 	int		size;
 
 	line = NULL;
-	cub->map.fd = open(file, O_RDONLY);
-	if (cub->map.fd < 0)
-		ez_exit("Error opening the file");
-	size = count_map(cub->map.fd);
-	close(cub->map.fd);
+	size = count_map(file, cub);
 	cub->map.map = malloc(sizeof(char *) * (size + 1));
 	if (!cub->map.map)
 		ez_exit("Memory allocation failed");
