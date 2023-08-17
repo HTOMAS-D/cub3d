@@ -44,7 +44,7 @@ void	isolate_map(t_map *map)
 
 	j = -1;
 	count = line_nbr(&(map->map[8]));
-	map->mapHeight = count;
+	map->mapheight = count;
 	map->iso_map = malloc(sizeof(char *) * (count + 1));
 	if (!map->iso_map)
 		parse_exit(map, "failed to alloc iso_map");

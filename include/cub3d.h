@@ -48,15 +48,15 @@
 // #  define KEY_A		0
 // #  define KEY_S		1
 // #  define KEY_D		2
-#  define ARROW_LEFT 	123
-#  define ARROW_RIGHT	124
+# define ARROW_LEFT 	123
+# define ARROW_RIGHT	124
 
-typedef struct s_map t_map;
-typedef struct s_cub t_cub;
-typedef struct s_data t_data;
-typedef struct s_player t_player;
-typedef struct s_ray t_ray;
-typedef struct s_image t_image;
+typedef struct s_map	t_map;
+typedef struct s_cub	t_cub;
+typedef struct s_data	t_data;
+typedef struct s_player	t_player;
+typedef struct s_ray	t_ray;
+typedef struct s_image	t_image;
 
 struct s_image
 {
@@ -68,19 +68,19 @@ struct s_image
 	int		width;
 	int		height;
 	int		ceilingpoint;
-	int		floorPoint;
+	int		floorpoint;
 	int		text_end;
 	int		text_start;
-	double	wallH;
-	double	wizH;
+	double	wallh;
+	double	wizh;
 	int		x_axis;
 	int *data;
 };
 
 struct s_animation
 {
-	struct timeval old_time;
-	struct timeval new_time;
+	struct timeval	old_time;
+	struct timeval	new_time;
 	struct s_image	img;
 	int				frame;
 	int				max;
@@ -90,20 +90,20 @@ struct s_animation
 
 struct s_ray
 {
-	int hit;
-	double rayDirX;
-	double rayDirY;
-	double deltaDistX;
-	double deltaDistY;
-	double sidedistY;
-	double sidedistX;
-	double wall_dist;
-	int mapX;
-	int mapY;
-	int stepX;
-	int stepY;
-	int side;
-	double wallx;
+	int	hit;
+	double	raydirx;
+	double	raydiry;
+	double	deltadistx;
+	double	deltadisty;
+	double	sidedisty;
+	double	sidedistx;
+	double	wall_dist;
+	int	mapx;
+	int	mapy;
+	int	stepx;
+	int	stepy;
+	int	side;
+	double	wallx;
 	int	wallside;
 };
 
@@ -120,25 +120,25 @@ struct s_object
 
 struct s_data
 {
-	int NO;
-	int SO;
-	int	WE;
-	int EA;
-	int F;
-	int C;
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	C; //hand fix
 };
 
 struct s_map
 {
 	t_data data;
 	int fd;
-	char **map;
-	char **img_paths;
-	char **color_str;
-	char **iso_map;
+	char	**map;
+	char	**img_paths;
+	char	**color_str;
+	char	**iso_map;
 	int	floor;
 	int	ceiling;
-	int mapHeight;
+	int mapheight;
 };
 
 struct s_move
@@ -151,15 +151,14 @@ struct s_move
 	double gravity;
 };
 
-
 struct s_player
 {
-	double posX;
-	double posY;
-	double	dirY;
-	double	dirX;
-	double	fovX;
-	double	fovY;
+	double posx;
+	double posy;
+	double	diry; //hand fix
+	double	dirx;
+	double	fovx;
+	double	fovy;
 	char	orientation;
 	struct s_move	move;
 };
@@ -174,13 +173,13 @@ struct s_cub
 	int		n_renders;
 	struct timeval old_time;
 	struct timeval new_time;
-	double	*ZBuffer;
+	double	*zbuffer;
 	t_player player;
 	t_image screen;
-	t_image	wallNO;
-	t_image	wallSO;
-	t_image	wallWE;
-	t_image	wallEA;
+	t_image	wallno;
+	t_image	wallso;
+	t_image	wallwe;
+	t_image	wallea;
 	t_ray		ray;
 	int			press_f;
 	struct s_object	wizard;
@@ -188,9 +187,8 @@ struct s_cub
 	int numb_players;
 };
 
-
 //MAIN.C
-t_cub *cub(void);
+t_cub*cub(void);
 void create_game(t_cub *cub);
 void init_screen(t_cub *cub);
 
@@ -199,7 +197,6 @@ void init_screen(t_cub *cub);
 //PARSE_FILE.C
 void check_file(t_cub *cub, int ac, char **av);
 void check_scene(char *str);
-
 
 //MAP.C
 void get_map(t_cub *cub, char *file);
@@ -227,9 +224,6 @@ int line_nbr(char **map);
 void	get_player_vars(char **map);
 void add_vars(int x, int y, char **map);
 void init_player_vars(t_cub *cub);
-
-
-
 
 /********************* UTILS **********************/
 
@@ -291,12 +285,10 @@ void	get_wall(t_cub *cub, t_ray *ray);
 void	get_door(t_cub *cub, t_ray *ray);
 void	put_screen(t_cub *cub);
 
-
 //RAYCASTER_2.C
 void raycaster(t_cub *cub);
 void calc_step(t_cub *cub, t_ray *ray);
 void ray_hit(t_cub *cub, t_ray *ray);
-
 
 //HOOKS.C
 int close_game(t_cub *cub);
@@ -323,7 +315,6 @@ void move_a(t_cub *cub);
 void move_s(t_cub *cub);
 void move_d(t_cub *cub);
 void	jump(t_cub *cub);
-
 
 //MINIMAP.C
 void minimap(t_cub *cub, char **map);

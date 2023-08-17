@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 19:20:07 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:32 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:09:15 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int	press_f(t_cub *cub)
 {
 	if (cub->ray.hit)
 	{
-		if ((int)cub->player.posX == (int)(cub->door.x) && \
-		((int)cub->player.posY == (int)cub->door.y + 1 || \
-		(int)cub->player.posY == (int)cub->door.y - 1))
+		if ((int)cub->player.posx == (int)(cub->door.x) && \
+		((int)cub->player.posy == (int)cub->door.y + 1 \
+		|| (int)cub->player.posy == (int)cub->door.y - 1))
 		{
 			cub->press_f = 1;
 			return (1);
 		}
-		if ((int)cub->player.posY == (int)(cub->door.y) && \
-		((int)cub->player.posX == (int)cub->door.x + 1 || \
-		(int)cub->player.posX == (int)cub->door.x - 1))
+		if ((int)cub->player.posy == (int)(cub->door.y) && \
+		((int)cub->player.posx == (int)cub->door.x + 1 || \
+		(int)cub->player.posx == (int)cub->door.x - 1))
 		{
 			cub->press_f = 1;
 			return (1);

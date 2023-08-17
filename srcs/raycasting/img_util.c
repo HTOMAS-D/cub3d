@@ -38,13 +38,13 @@ int	check_color(int x, int y, int size, t_image *img)
 void	get_color_choose_img(t_image **img)
 {
 	if (cub()->ray.wallside == 1)
-		*img = &cub()->wallEA;
+		*img = &cub()->wallea;
 	else if (cub()->ray.wallside == 2)
-		*img = &cub()->wallSO;
+		*img = &cub()->wallso;
 	else if (cub()->ray.wallside == 3)
-		*img = &cub()->wallWE;
+		*img = &cub()->wallwe;
 	else if (cub()->ray.wallside == 0)
-		*img = &cub()->wallNO;
+		*img = &cub()->wallno;
 	else if (cub()->ray.wallside == -1)
 		*img = &cub()->wizard.animation.img;
 	else
