@@ -15,7 +15,7 @@ SRC     =	$(MAIN_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
 				srcs/raycasting/minimap.c srcs/utils/ft_atoi.c srcs/parse/check_walls.c \
 				srcs/animations.c srcs/object.c srcs/raycasting/draw_square.c \
-				srcs/raycasting/raycaster_2.c
+				srcs/raycasting/raycaster_2.c srcs/print_object.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include

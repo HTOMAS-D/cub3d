@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:01:23 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 17:34:04 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:59:15 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,9 +298,11 @@ int		update_door_animation(t_cub *cub);
 
 //OBJECT.C
 int		init_object(t_cub *cub);
-void	print_object(t_cub *cub);
 int		press_f(t_cub *cub);
 int		print_phrase(t_cub *cub, char *str);
+
+//PRINT_OBJECT.C
+void	print_object(t_cub *cub);
 
 //MOVES.C
 void	move_w(t_cub *cub);
