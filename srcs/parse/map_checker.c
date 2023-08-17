@@ -14,7 +14,7 @@
 
 int	letters_check(t_data *data)
 {
-	if (data->NO != 1 || data->SO != 1 || data->WE != 1 || data->EA != 1)
+	if (data->no != 1 || data->so != 1 || data->we != 1 || data->ea != 1)
 		return (1);
 	else
 		return (0);
@@ -24,22 +24,22 @@ int	check_path_letters(char *str)
 {
 	if (str[0] == 'N' && str[1] == 'O' && str[2] == ' ')
 	{
-		cub()->map.data.NO++;
+		cub()->map.data.no++;
 		return (0);
 	}
 	else if (str[0] == 'S' && str[1] == 'O' && str[2] == ' ')
 	{
-		cub()->map.data.SO++;
+		cub()->map.data.so++;
 		return (0);
 	}
 	else if (str[0] == 'W' && str[1] == 'E' && str[2] == ' ')
 	{
-		cub()->map.data.WE++;
+		cub()->map.data.we++;
 		return (0);
 	}
 	else if (str[0] == 'E' && str[1] == 'A' && str[2] == ' ')
 	{
-		cub()->map.data.EA++;
+		cub()->map.data.ea++;
 		return (0);
 	}
 	else
@@ -91,11 +91,11 @@ void	get_img(t_map *map)
 
 void	check_map(t_map *map)
 {
-	map->data.NO = 0;
-	map->data.SO = 0;
-	map->data.WE = 0;
-	map->data.EA = 0;
-	map->data.F = 0;
+	map->data.no = 0;
+	map->data.so = 0;
+	map->data.we = 0;
+	map->data.ea = 0;
+	map->data.f = 0;
 	map->data.C = 0;
 	get_img(map);
 	get_colors(map);

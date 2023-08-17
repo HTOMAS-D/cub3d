@@ -24,10 +24,10 @@ t_image load_image(char *path)
 int	init_sprites(t_cub *cub)
 {
 	//printf("%s\n", cub->map.img_paths[1]);
-	cub->wallNO = load_image(cub->map.img_paths[0]);
-	cub->wallSO = load_image(cub->map.img_paths[1]);
-	cub->wallWE = load_image(cub->map.img_paths[2]);
-	cub->wallEA = load_image(cub->map.img_paths[3]);
+	cub->wallno = load_image(cub->map.img_paths[0]);
+	cub->wallso = load_image(cub->map.img_paths[1]);
+	cub->wallwe = load_image(cub->map.img_paths[2]);
+	cub->wallea = load_image(cub->map.img_paths[3]);
 	cub->door.animation.img = load_image("./pics/door_sprite.xpm");
 	cub->door.animation.frame = 0;
 	cub->door.animation.max = 3;

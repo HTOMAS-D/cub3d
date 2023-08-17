@@ -41,7 +41,7 @@ int	get_rgb(char *str)
 
 int	all_color(t_data *data)
 {
-	if (data->F != 1 || data->C != 1)
+	if (data->f != 1 || data->C != 1)
 		return (1);
 	else
 		return (0);
@@ -51,7 +51,7 @@ int	check_color_letters(char *str)
 {
 	if (str[0] == 'F' && str[1] == ' ')
 	{
-		cub()->map.data.F++;
+		cub()->map.data.f++;
 		cub()->map.floor = get_rgb(str + 2);
 		return (0);
 	}

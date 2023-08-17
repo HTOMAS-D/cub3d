@@ -24,12 +24,12 @@ int	press_f(t_cub *cub)
 {
 	if (cub->ray.hit)
 	{
-		if ((int)cub->player.posX == (int)(cub->door.x) && ((int)cub->player.posY == (int)cub->door.y + 1 || (int)cub->player.posY == (int)cub->door.y - 1))
+		if ((int)cub->player.posx == (int)(cub->door.x) && ((int)cub->player.posy == (int)cub->door.y + 1 || (int)cub->player.posy == (int)cub->door.y - 1))
 		{
 			cub->press_f = 1;
 			return (1);
 		}
-		if ((int)cub->player.posY == (int)(cub->door.y) && ((int)cub->player.posX == (int)cub->door.x + 1 || (int)cub->player.posX == (int)cub->door.x - 1))
+		if ((int)cub->player.posy == (int)(cub->door.y) && ((int)cub->player.posx == (int)cub->door.x + 1 || (int)cub->player.posx == (int)cub->door.x - 1))
 		{
 			cub->press_f = 1;
 			return (1);
@@ -97,13 +97,13 @@ void	print_object(t_cub *cub)
 
 	cub->ray.wallside = -1;
 	
-	double spriteX = cub->wizard.x - cub->player.posX;
-    double spriteY = cub->wizard.y - cub->player.posY;
+	double spriteX = cub->wizard.x - cub->player.posx;
+    double spriteY = cub->wizard.y - cub->player.posy;
 
-	double invDet = 1.0 / (cub->player.fovX * cub->player.dirY - cub->player.dirX * cub->player.fovY);
+	double invDet = 1.0 / (cub->player.fovx * cub->player.diry - cub->player.dirx * cub->player.fovy);
 
-	double transformX = invDet * (cub->player.dirY * spriteX - cub->player.dirX * spriteY);
-    double transformY = invDet * (-cub->player.fovY * spriteX + cub->player.fovX * spriteY);
+	double transformX = invDet * (cub->player.diry * spriteX - cub->player.dirx * spriteY);
+    double transformY = invDet * (-cub->player.fovy * spriteX + cub->player.fovx * spriteY);
 
 	int spriteScreenX = (int)((SCREENW / 2) * (1 + transformX / transformY));
 	
@@ -130,7 +130,7 @@ void	print_object(t_cub *cub)
 	
 	for(int stripe = drawStartX; stripe < drawEndX; stripe++)
       {
-        if(transformY > 0 && transformY < cub->ZBuffer[stripe])
+        if(transformY > 0 && transformY < cub->zbuffer[stripe])
         {
 			cub->wizard.printx = ((stripe - text_x_start) * cub->wizard.animation.size) / (text_x_end - text_x_start);
         	for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe

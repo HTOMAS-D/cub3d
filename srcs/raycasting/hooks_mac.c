@@ -47,18 +47,18 @@ void	rotation(t_player *player, double angle)
 	data.radians = angle * (M_PI / 180.0);
 	data.cos_angle = cos(data.radians);
 	data.sin_angle = sin(data.radians);
-	data.new_dirx = player->dirX * data.cos_angle - player->dirY * \
+	data.new_dirx = player->dirx * data.cos_angle - player->diry * \
 	data.sin_angle;
-	data.new_diry = player->dirX * data.sin_angle + player->dirY * \
+	data.new_diry = player->dirx * data.sin_angle + player->diry * \
 	data.cos_angle;
-	player->dirX = data.new_dirx;
-	player->dirY = data.new_diry;
-	data.new_fovx = player->fovX * data.cos_angle - player->fovY * \
+	player->dirx = data.new_dirx;
+	player->diry = data.new_diry;
+	data.new_fovx = player->fovx * data.cos_angle - player->fovy * \
 	data.sin_angle;
-	data.new_fovy = player->fovX * data.sin_angle + player->fovY * \
+	data.new_fovy = player->fovx * data.sin_angle + player->fovy * \
 	data.cos_angle;
-	player->fovX = data.new_fovx;
-	player->fovY = data.new_fovy;
+	player->fovx = data.new_fovx;
+	player->fovy = data.new_fovy;
 }
 
 int	key_release(int key, t_cub *cub)

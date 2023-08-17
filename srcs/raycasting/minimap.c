@@ -17,9 +17,9 @@ void	get_map_around_loop(int map_pos_y, char **map, int m_y)
 	int	m_x;
 	int	map_pos_x;
 
-	m_x = (int)cub()->player.posX - 6;
+	m_x = (int)cub()->player.posx - 6;
 	map_pos_x = 10;
-	while (m_x <= (int)cub()->player.posX + 5)
+	while (m_x <= (int)cub()->player.posx + 5)
 	{
 		if (m_x >= 0 && m_x < ft_lenstr(map[m_y]) \
 		&& map[m_y][m_x] == '1')
@@ -45,9 +45,9 @@ void	get_map_around(t_cub *cub, char **map)
 	int	m_y;
 	int	map_pos_y;
 
-	m_y = (int)cub->player.posY - 6;
+	m_y = (int)cub->player.posy - 6;
 	map_pos_y = 10;
-	while (m_y <= (int)cub->player.posY + 5 && m_y < cub->map.mapHeight)
+	while (m_y <= (int)cub->player.posy + 5 && m_y < cub->map.mapheight)
 	{
 		if (m_y >= 0)
 			get_map_around_loop(map_pos_y, map, m_y);

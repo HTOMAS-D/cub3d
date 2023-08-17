@@ -38,7 +38,7 @@ void	create_game(t_cub *cub)
 	mlx_mouse_hide(cub->mlx, cub->win);
 	init_sprites(cub);
 	init_object(cub);
-	cub->ZBuffer = ft_calloc(SCREENW, sizeof(double));
+	cub->zbuffer = ft_calloc(SCREENW, sizeof(double));
 	init_player_vars(cub);
 	mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub);
 	cub->fps_str = NULL;

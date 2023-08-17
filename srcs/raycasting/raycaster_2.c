@@ -14,22 +14,22 @@
 
 void	dda(t_ray *ray)
 {
-	if (ray->sidedistX < ray->sidedistY)
+	if (ray->sidedistx < ray->sidedisty)
 	{
-		ray->sidedistX += ray->deltaDistX;
-		ray->mapX += ray->stepX;
+		ray->sidedistx += ray->deltadistx;
+		ray->mapx += ray->stepx;
 		ray->side = 0;
-		if (ray->stepX < 0)
+		if (ray->stepx < 0)
 			ray->wallside = 0;
 		else
 			ray->wallside = 2;
 	}
 	else
 	{
-		ray->sidedistY += ray->deltaDistY;
-		ray->mapY += ray->stepY;
+		ray->sidedisty += ray->deltadisty;
+		ray->mapy += ray->stepy;
 		ray->side = 1;
-		if (ray->stepY < 0)
+		if (ray->stepy < 0)
 			ray->wallside = 1;
 		else
 			ray->wallside = 3;
@@ -46,9 +46,9 @@ void	ray_hit(t_cub *cub, t_ray *ray)
 	while (i == 0)
 	{
 		dda(ray);
-		if (cub->map.iso_map[ray->mapY][ray->mapX] == '1')
+		if (cub->map.iso_map[ray->mapy][ray->mapx] == '1')
 			i = 1;
-		else if (cub->map.iso_map[ray->mapY][ray->mapX] == 'D')
+		else if (cub->map.iso_map[ray->mapy][ray->mapx] == 'D')
 			copy_ray(ray, &d);
 	}
 	if (!d)
@@ -57,25 +57,25 @@ void	ray_hit(t_cub *cub, t_ray *ray)
 
 void	calc_step(t_cub *cub, t_ray *ray)
 {
-	if (ray->rayDirX < 0)
+	if (ray->raydirx < 0)
 	{
-		ray->stepX = -1;
-		ray->sidedistX = (cub->player.posX - ray->mapX) * ray->deltaDistX;
+		ray->stepx = -1;
+		ray->sidedistx = (cub->player.posx - ray->mapx) * ray->deltadistx;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sidedistX = (ray->mapX + 1.0 - cub->player.posX) * ray->deltaDistX;
+		ray->stepx = 1;
+		ray->sidedistx = (ray->mapx + 1.0 - cub->player.posx) * ray->deltadistx;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->raydiry < 0)
 	{
-		ray->stepY = -1;
-		ray->sidedistY = (cub->player.posY - ray->mapY) * ray->deltaDistY;
+		ray->stepy = -1;
+		ray->sidedisty = (cub->player.posy - ray->mapy) * ray->deltadisty;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sidedistY = (ray->mapY + 1.0 - cub->player.posY) * ray->deltaDistY;
+		ray->stepy = 1;
+		ray->sidedisty = (ray->mapy + 1.0 - cub->player.posy) * ray->deltadisty;
 	}
 }
 
@@ -84,18 +84,18 @@ void	calc_directions(t_cub *cub)
 	double	viewx;
 
 	viewx = 2 * cub->screen.x_axis / (double)SCREENW -1;
-	cub->ray.rayDirX = cub->player.dirX + cub->player.fovX * viewx;
-	cub->ray.rayDirY = cub->player.dirY + cub->player.fovY * viewx;
-	cub->ray.mapX = (int)cub->player.posX;
-	cub->ray.mapY = (int)cub->player.posY;
-	if (cub->ray.rayDirX == 0)
-		cub->ray.deltaDistX = 1e30;
+	cub->ray.raydirx = cub->player.dirx + cub->player.fovx * viewx;
+	cub->ray.raydiry = cub->player.diry + cub->player.fovy * viewx;
+	cub->ray.mapx = (int)cub->player.posx;
+	cub->ray.mapy = (int)cub->player.posy;
+	if (cub->ray.raydirx == 0)
+		cub->ray.deltadistx = 1e30;
 	else
-		cub->ray.deltaDistX = fabs(1 / cub->ray.rayDirX);
-	if (cub->ray.rayDirY == 0)
-		cub->ray.deltaDistY = 1e30;
+		cub->ray.deltadistx = fabs(1 / cub->ray.raydirx);
+	if (cub->ray.raydiry == 0)
+		cub->ray.deltadisty = 1e30;
 	else
-		cub->ray.deltaDistY = fabs(1 / cub->ray.rayDirY);
+		cub->ray.deltadisty = fabs(1 / cub->ray.raydiry);
 }
 
 void	raycaster(t_cub *cub)
