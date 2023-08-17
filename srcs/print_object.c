@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:57:53 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 18:05:36 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:10:35 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_object_loop(t_cub *cub, struct s_print_object *data)
 	while (++data->stripe < data->draw_end_x)
 	{
 		if (data->transform_y > 0 && data->transform_y < \
-		cub->ZBuffer[data->stripe])
+		cub->zbuffer[data->stripe])
 		{
 			cub->wizard.printx = ((data->stripe - data->text_x_start) * \
 			cub->wizard.animation.size) / (data->text_x_end - \
@@ -58,14 +58,14 @@ void	print_object_loop(t_cub *cub, struct s_print_object *data)
 void	print_object_2(t_cub *cub, struct s_print_object *data)
 {
 	cub->ray.wallside = -1;
-	data->sprite_x = cub->wizard.x - cub->player.posX;
-	data->sprite_y = cub->wizard.y - cub->player.posY;
-	data->inv_det = 1.0 / (cub->player.fovX * cub->player.dirY - \
-	cub->player.dirX * cub->player.fovY);
-	data->transform_x = data->inv_det * (cub->player.dirY * \
-	data->sprite_x - cub->player.dirX * data->sprite_y);
-	data->transform_y = data->inv_det * (-cub->player.fovY * \
-	data->sprite_x + cub->player.fovX * data->sprite_y);
+	data->sprite_x = cub->wizard.x - cub->player.posx;
+	data->sprite_y = cub->wizard.y - cub->player.posy;
+	data->inv_det = 1.0 / (cub->player.fovx * cub->player.diry - \
+	cub->player.dirx * cub->player.fovy);
+	data->transform_x = data->inv_det * (cub->player.diry * \
+	data->sprite_x - cub->player.dirx * data->sprite_y);
+	data->transform_y = data->inv_det * (-cub->player.fovy * \
+	data->sprite_x + cub->player.fovx * data->sprite_y);
 	data->sprite_screen_x = (int)((SCREENW / 2) * \
 	(1 + data->transform_x / data->transform_y));
 	data->sprite_height = abs((int)(SCREENH / (data->transform_y)));
