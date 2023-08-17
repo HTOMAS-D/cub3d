@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: htomas-d <htomas-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:01:23 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 17:59:15 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:02:21 by htomas-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ struct s_move
 	int			a;
 	int			s;
 	int			d;
+	int			a_left;
+	int			a_right;
 	int			jump;
 	double		gravity;
 };
@@ -317,5 +319,9 @@ void	get_borders(t_cub *cub);
 void	get_player(t_cub *cub);
 void	get_map_around(t_cub *cub, char **map);
 void	draw_square(int pX, int pY, int color);
+
+//LOOKRL.C
+void	look_left(t_cub *cub);
+void	look_right(t_cub *cub);
 
 #endif

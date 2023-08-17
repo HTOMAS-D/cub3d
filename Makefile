@@ -2,7 +2,7 @@ NAME    = cub3d
 UNAME   := $(shell uname)
 LFLAGS  =  -L$(LIBMLX)
 OBJ     = $(SRC:%.c=%.o)
-KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP) -D $(F)
+KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP) -D $(F) -D $(A1) -D $(A2)
 RATES	= -D $(GRATE)
 SRC     =	$(MAIN_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
@@ -15,7 +15,7 @@ SRC     =	$(MAIN_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
 				srcs/raycasting/minimap.c srcs/utils/ft_atoi.c srcs/parse/check_walls.c \
 				srcs/animations.c srcs/object.c srcs/raycasting/draw_square.c \
-				srcs/raycasting/raycaster_2.c srcs/print_object.c
+				srcs/raycasting/raycaster_2.c srcs/print_object.c srcs/lookRL.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
@@ -49,6 +49,8 @@ else
 	R = KEY_R=114
 	F = KEY_F=102
 	Q = KEY_Q=113
+	A1 = KEY_A_RIGHT=65363
+	A2 = KEY_A_LEFT=65361
 	ESP = KEY_ESPACE=32
 	GRATE = GAME_RATE=100
 	HOOKS_C = srcs/raycasting/hooks_linux.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: htomas-d <htomas-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:50:15 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 17:37:11 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:54:30 by htomas-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ int	update_player(t_cub *cub)
 		move_a(cub);
 	if (cub->player.move.d)
 		move_d(cub);
+	if (cub->player.move.a_left)
+		look_left(cub);
+	if (cub->player.move.a_right)
+		look_right(cub);
 	return (0);
 }
