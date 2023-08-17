@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <htomas-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:01:23 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 19:02:21 by htomas-d         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:47:57 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ struct s_player
 
 struct s_cub
 {
+	int				rgb_flag;
 	t_map			map;
 	void			*mlx;
 	int				horizon;

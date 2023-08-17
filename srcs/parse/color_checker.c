@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:53:13 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 09:53:16 by htomas-d         ###   ########.fr       */
+/*   Updated: 2023/08/17 20:01:23 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	get_rgb(char *str)
 			temp[i[0]++] = 0;
 		str++;
 	}
+	if (*(str-1))
+		cub()->rgb_flag = 7;
 	res = convert_rbg(i[1], i[2], i[3]);
 	free(i);
 	free(temp);
@@ -81,6 +83,8 @@ void	get_colors(t_map *map)
 		if (check_color_letters(map->map[i]))
 			parse_exit(map, "Wrong identifier");
 	}
+	if (cub()->rgb_flag != 6)
+		parse_exit(map, "Need 3 numbers for rgb");
 	if (all_color(&(map->data)))
 		parse_exit(map, "Missing identifier");
 	i = 4;

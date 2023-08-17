@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 17:17:26 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/07/31 18:18:40 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:55:38 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ int	ft_atoi(const char *nptr)
 	}
 	else if (*nptr == '+')
 		nptr++;
+	cub()->rgb_flag++;
 	while (*nptr >= '0' && *nptr <= '9')
 	{
 		nb = nb * 10 + *nptr - '0';
 		nptr++;
 	}
+	if (*nptr)
+		cub()->rgb_flag = 7;
 	return (nb * signal);
 }

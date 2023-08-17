@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lookRL.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <htomas-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:48:22 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 19:00:21 by htomas-d         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:18:03 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	look_right(t_cub *cub)
 	cub->player.fovy = oldplanex * sin(rotspeed)
 		+ cub->player.fovy * cos(rotspeed);
 }
-
 
 void	look_left(t_cub *cub)
 {

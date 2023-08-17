@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:27:20 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/07/31 19:12:22 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:33:49 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_rgb(int r, int g, int b)
 {
 	if (r > 255 || r < 0 || g > 255 || g < 0 || b > 255 || b < 0)
-		parse_exit(&cub()->map, "RGB values go from 0 - 255.\n");
+		parse_exit(&cub()->map, "RGB values go from 0 - 255.");
 	return (0);
 }
 
