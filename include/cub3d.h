@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:01:23 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 16:01:36 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:34:04 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,13 @@ int 	check_color(int x, int y, int size, t_image *img);
 int	init_sprites(t_cub *cub);
 
 //RAYCASTER.C
+void	copy_ray(t_ray *og, int *counter);
+void	get_wall(t_cub *cub, t_ray *ray);
+void	get_door(t_cub *cub, t_ray *ray);
+void	put_screen(t_cub *cub);
+
+
+//RAYCASTER_2.C
 void raycaster(t_cub *cub);
 void calc_step(t_cub *cub, t_ray *ray);
 void ray_hit(t_cub *cub, t_ray *ray);
@@ -321,6 +328,6 @@ void minimap(t_cub *cub, char **map);
 void get_borders(t_cub *cub);
 void get_player(t_cub *cub);
 void get_map_around(t_cub *cub, char **map);
-void draw_square(t_cub *cub, int pX, int pY, int color);
+void draw_square(int pX, int pY, int color);
 
 #endif

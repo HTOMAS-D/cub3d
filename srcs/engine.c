@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 15:50:15 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 15:43:52 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:51:33 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,5 @@ int	update_player(t_cub *cub)
 		move_a(cub);
 	if (cub->player.move.d)
 		move_d(cub);
-	if ((cub->player.move.jump && cub->horizon == SCREENH / 2) || (cub->player.move.jump && cub->player.move.jump != JUMP_HEIGHT))
-		jump(cub);
-	if (cub->horizon != SCREENH / 2 && !cub->player.move.jump)
-	{
-		cub->horizon -= (int)cub->player.move.gravity;
-		cub->player.move.gravity += GRAVITY_FORCE;
-		if (cub->player.move.gravity >= MAX_GRAV)
-			cub->player.move.gravity = MAX_GRAV;
-		if (cub->horizon < SCREENH / 2)
-			cub->horizon = SCREENH / 2;
-	}
-	if (cub->horizon == SCREENH / 2)
-		cub->player.move.gravity = 0;
 	return (0);
 }

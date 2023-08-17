@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   img_util.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 16:15:27 by mtiago-s          #+#    #+#             */
+/*   Updated: 2023/08/17 17:36:14 by mtiago-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int treat_var_get_color(int var, int start, int max)
+int	treat_var_get_color(int var, int start, int max)
 {
-	double size;
+	double	size;
 
 	size = cub()->screen.text_end - cub()->screen.text_start;
 	size /= max;
@@ -11,9 +23,9 @@ int treat_var_get_color(int var, int start, int max)
 	return (var);
 }
 
-int check_color(int x, int y, int size, t_image *img)
+int	check_color(int x, int y, int size, t_image *img)
 {
-	char *dst;
+	char	*dst;
 
 	x = (int)(cub()->door.ray.wallx * size);
 	y = treat_var_get_color(y, cub()->screen.text_start, size);
@@ -23,31 +35,38 @@ int check_color(int x, int y, int size, t_image *img)
 	return (1);
 }
 
+void	get_color_choose_img(t_image **img)
+{
+	if (cub()->ray.wallside == 1)
+		*img = &cub()->wallEA;
+	else if (cub()->ray.wallside == 2)
+		*img = &cub()->wallSO;
+	else if (cub()->ray.wallside == 3)
+		*img = &cub()->wallWE;
+	else if (cub()->ray.wallside == 0)
+		*img = &cub()->wallNO;
+	else if (cub()->ray.wallside == -1)
+		*img = &cub()->wizard.animation.img;
+	else
+		*img = &cub()->door.animation.img;
+}
+
 int	get_color(int x, int y, int size)
 {
 	char	*dst;
 	t_image	*img;
 
-	if (cub()->ray.wallside == 1) //EA
-		img = &cub()->wallEA;
-	else if (cub()->ray.wallside == 2) //SO
-		img = &cub()->wallSO;
-	else if (cub()->ray.wallside == 3) //WE
-		img = &cub()->wallWE;
-	else if (cub()->ray.wallside == 0)// NO
-		img = &cub()->wallNO;
-	else if (cub()->ray.wallside == -1) //wizard
-		img = &cub()->wizard.animation.img;
-	else // door
-		img = &cub()->door.animation.img;
+	get_color_choose_img(&img);
 	if (cub()->ray.wallside == -1)
 	{
-		x = (int)(cub()->wizard.printx) + (size * cub()->wizard.animation.frame);
+		x = (int)(cub()->wizard.printx) + (size * \
+		cub()->wizard.animation.frame);
 		y = (int)(cub()->wizard.printy);
 	}
-	else if (cub()->ray.wallside == - 2)
+	else if (cub()->ray.wallside == -2)
 	{
-		x = (int)((cub()->door.ray.wallx * size) + (size * cub()->door.animation.frame));
+		x = (int)((cub()->door.ray.wallx * size) + \
+		(size * cub()->door.animation.frame));
 		y = treat_var_get_color(y, cub()->screen.text_start, size);
 	}
 	else

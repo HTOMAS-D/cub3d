@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:55:11 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 16:07:49 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:35:49 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ struct s_rotation
 	double	new_fovx;
 	double	new_fovy;
 }			t_rotation;
-
 
 int	close_game(t_cub *cub)
 {
