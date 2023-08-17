@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 10:04:21 by htomas-d          #+#    #+#             */
+/*   Updated: 2023/08/17 10:04:23 by htomas-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-
-void ez_exit(char *str)
+void    ez_exit(char *str)
 {
     printf("%s%s\n", RED, str);
     exit(1);
 }
 
-void parse_exit(t_map *map, char *str)
+void    parse_exit(t_map *map, char *str)
 {
     if (map)
     {
@@ -18,7 +29,7 @@ void parse_exit(t_map *map, char *str)
     free_exit(cub(), str);
 }
 
-void free_exit(t_cub *cub, char *str)
+void    free_exit(t_cub *cub, char *str)
 {
     if (cub->map.map)
         free_matrix(&(cub->map.map));

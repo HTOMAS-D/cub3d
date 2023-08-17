@@ -57,21 +57,21 @@ int	check_door(t_map *map, int y, int x)
 int	check_doors(t_map *map)
 {
 	int	y;
-	int x;
-	int	Hmany;
+	int	x;
+	int	hmany;
 
 	y = -1;
-	Hmany = 0;
-	while(map->iso_map[++y])
+	hmany = 0;
+	while (map->iso_map[++y])
 	{
 		x = -1;
-		while(map->iso_map[y][++x])
+		while (map->iso_map[y][++x])
 		{
-			if (map->iso_map[y][x] == 'D' && ++Hmany)
+			if (map->iso_map[y][x] == 'D' && ++hmany)
 				check_door(map, y, x);
 		}
 	}
-	if (Hmany > 1)
+	if (hmany > 1)
 		parse_exit(map, "This game only handles one door");
 	return (0);
 }

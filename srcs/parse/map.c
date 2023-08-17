@@ -1,27 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 09:50:11 by htomas-d          #+#    #+#             */
+/*   Updated: 2023/08/17 09:50:12 by htomas-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int count_map(int fd)
+int	count_map(int fd)
 {
-	char *line;
-	int count;
+	char	*line;
+	int		count;
 
 	count = 0;
-	while(1)
+	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		count++;
 		free_array(line);
 	}
 	return (count);
 }
 
-void get_map(t_cub *cub, char *file)
+void	get_map(t_cub *cub, char *file)
 {
-	char *line = NULL;
-	int size;
+	char	*line;
+	int		size;
 
+	line = NULL;
 	cub->map.fd = open(file, O_RDONLY);
 	if (cub->map.fd < 0)
 		ez_exit("Error opening the file");
@@ -38,7 +51,7 @@ void get_map(t_cub *cub, char *file)
 	{
 		line = get_next_line(cub->map.fd);
 		if (!line)
-			break;
+			break ;
 		cub->map.map[size++] = ft_strdup(line);
 		free_array(line);
 	}

@@ -1,8 +1,8 @@
 #include "cub3d.h"
 
-int ft_lenstr(char *str)
+int	ft_lenstr(char *str)
 {
-	int i;
+	int	i;
 
 	if (!str)
 		return (0);
@@ -12,22 +12,21 @@ int ft_lenstr(char *str)
 	return (i);
 }
 
-//check the occurence on a char on a str, starting from the end
-char *ft_strrchr(char *str, char c)
+char	*ft_strrchr(char *str, char c)
 {
-	int i;
-	
+	int	i;
+
 	if (!str)
-		return(NULL);
+		return (NULL);
 	i = ft_lenstr(str);
-	while(str[--i] != c && i < -1)
+	while (str[--i] != c && i < -1)
 		;
 	if (i == -1)
 		return (NULL);
-	return(&str[i]);
+	return (&str[i]);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
@@ -50,10 +49,10 @@ char *ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	str[j] = '\0';
-	return(str);
+	return (str);
 }
 
-char *ft_strdup(char *str)
+char	*ft_strdup(char *str)
 {
 	char	*line;
 	int		i;
