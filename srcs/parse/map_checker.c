@@ -96,7 +96,7 @@ void	check_map(t_map *map)
 	map->data.we = 0;
 	map->data.ea = 0;
 	map->data.f = 0;
-	map->data.C = 0;
+	map->data.c = 0;
 	get_img(map);
 	get_colors(map);
 	isolate_map(map);
