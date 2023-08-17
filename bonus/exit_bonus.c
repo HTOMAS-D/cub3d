@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:04:21 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 16:12:46 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:36:51 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	free_exit(t_cub *cub, char *str)
 		free_matrix(&(cub->map.iso_map));
 	if (cub->zbuffer)
 		free(cub->zbuffer);
+	if (cub->map.color_str)
+		free_matrix(&(cub->map.color_str));
+	if (cub->fps_str)
+		free(cub->fps_str);
 	free_mlx(cub);
 	ez_exit(str);
 }

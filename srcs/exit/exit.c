@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:04:21 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 18:41:47 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:28:40 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	free_exit(t_cub *cub, char *str)
 		free_matrix(&(cub->map.img_paths));
 	if (cub->map.iso_map)
 		free_matrix(&(cub->map.iso_map));
+	if (cub->zbuffer)
+		free(cub->zbuffer);
+	if (cub->map.color_str)
+		free_matrix(&(cub->map.color_str));
 	free_mlx(cub);
 	ez_exit(str);
 }

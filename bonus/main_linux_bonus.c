@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_linux.c                                       :+:      :+:    :+:   */
+/*   main_linux_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:04:00 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 17:04:02 by htomas-d         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:47:58 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_screen(t_cub *cub)
 			&cub->screen.size_line, &cub->screen.endian);
 }
 
+//mlx_mouse_hide(cub->mlx, cub->win);
 void	create_game(t_cub *cub)
 {
 	cub->mlx = mlx_init();
@@ -35,7 +36,6 @@ void	create_game(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SCREENW, SCREENH, "cub3d");
 	if (!cub->win)
 		free_exit(cub, "mlx_new_window failed");
-	mlx_mouse_hide(cub->mlx, cub->win);
 	init_sprites(cub);
 	init_object(cub);
 	cub->zbuffer = ft_calloc(SCREENW, sizeof(double));

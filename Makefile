@@ -54,7 +54,7 @@ else
 	CFLAGS  = -Wall -Werror -Wextra -g $(KEYCODES) -I$(INC) -Iinclude -O3 $(RATES) -Imlx_linux
 	CC = @cc
 	LIBMLX  = mlx_linux
-	LFLAGS += -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fsanitize=address -g
+	LFLAGS += -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz #-fsanitize=address -g
 	ESC = KEY_ESC=65307
 	W = KEY_W=119
 	A = KEY_A=97

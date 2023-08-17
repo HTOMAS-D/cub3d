@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:53:13 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 20:12:27 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:44:48 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_rgb(char *str)
 	i = ft_calloc(5, sizeof(int));
 	if (!temp || !i)
 		return (-1);
-	while (*str && i[4] < 3)
+	while (str && *str && i[4] < 3)
 	{
 		i[0] = 0;
 		while (*str && *str != ',')
@@ -74,7 +74,7 @@ void	get_colors(t_map *map)
 
 	i = 4;
 	j = -1;
-	map->color_str = calloc(sizeof(char *), 3);
+	map->color_str = calloc(sizeof(char *), 4);
 	if (!map->color_str)
 		parse_exit(map, "failed to alloc color strings");
 	map->color_str[3] = NULL;

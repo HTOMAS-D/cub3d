@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:40:44 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 16:40:45 by htomas-d         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:47:04 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_strdup(char *str)
 	char	*line;
 	int		i;
 
-	line = malloc(ft_lenstr(str) + 1);
+	line = ft_calloc(ft_lenstr(str) + 1, sizeof(char));
 	if (!line)
 		return (NULL);
 	i = -1;

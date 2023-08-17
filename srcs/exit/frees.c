@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:48:17 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 18:40:17 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:34:30 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ void	free_mlx(t_cub *cub)
 {
 	if (cub->mlx != NULL)
 	{
+		mlx_destroy_image(cub->mlx, cub->screen.ptr);
+		mlx_destroy_image(cub->mlx, cub->wallwe.ptr);
+		mlx_destroy_image(cub->mlx, cub->wallso.ptr);
+		mlx_destroy_image(cub->mlx, cub->wallno.ptr);
+		mlx_destroy_image(cub->mlx, cub->wallea.ptr);
+		mlx_clear_window(cub->mlx, cub->win);
 		mlx_destroy_window(cub->mlx, cub->win);
+		mlx_destroy_display(cub->mlx);
 		free(cub->mlx);
 		cub->mlx = NULL;
 		cub->win = NULL;
@@ -66,4 +73,11 @@ void	free_stuff(t_cub *cub)
 		free_matrix(&(cub->map.iso_map));
 		cub->map.iso_map = NULL;
 	}
+	if (cub->map.color_str)
+	{
+		free_matrix(&(cub->map.color_str));
+		cub->map.color_str = NULL;
+	}
+	if (cub->zbuffer)
+		free(cub->zbuffer);
 }
