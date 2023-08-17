@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 09:56:32 by htomas-d          #+#    #+#             */
+/*   Updated: 2023/08/17 16:14:18 by mtiago-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *str)
@@ -35,15 +47,15 @@ char	*ft_join(char *line, char *stash)
 	return (ret);
 }
 
-int ft_nextclean(char *stash)
+int	ft_nextclean(char *stash)
 {
 	int	nl_flag;
 	int	i;
 	int	j;
 
+	nl_flag = 0;
 	i = 0;
 	j = 0;
-
 	while (stash[i])
 	{
 		if (stash[i] == '\n')

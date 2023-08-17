@@ -1,33 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   isolate_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 09:36:37 by htomas-d          #+#    #+#             */
+/*   Updated: 2023/08/17 09:36:39 by htomas-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int double_check(char *map)
+int	double_check(char *map)
 {
-	printf("%s", map);
-	int i = ft_lenstr(map);
+	int	i;
+
+	i = ft_lenstr(map);
 	if (i < 4)
-		return 1;
-	if(map[i - 1] == 'm' && map[i - 2] == 'p'
+		return (1);
+	if (map[i - 1] == 'm' && map[i - 2] == 'p'
 		&& map[i - 3] == 'x' && map[i - 4] == '.'
 		&& map[i - 5])
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 }
 
-int line_nbr(char **map)
+int	line_nbr(char **map)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(map && map[++i])
+	while (map && map[++i])
 		;
-	return i;
+	return (i);
 }
 
-void isolate_map(t_map *map)
+void	isolate_map(t_map *map)
 {
-	int i;
-	int count;
-	int j;
+	int	i;
+	int	count;
+	int	j;
 
 	j = -1;
 	count = line_nbr(&(map->map[8]));
@@ -40,9 +53,9 @@ void isolate_map(t_map *map)
 	while (map && map->map[++i])
 		map->iso_map[++j] = ft_strdup(map->map[i]);
 	j = -1;
-	while(map->img_paths[++j])
+	while (map->img_paths[++j])
 	{
-		if(double_check(map->img_paths[j]))
+		if (double_check(map->img_paths[j]))
 			parse_exit(map, "file not a .xpm");
 	}
 }

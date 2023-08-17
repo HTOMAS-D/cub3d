@@ -34,7 +34,6 @@ int	ft_size(int nb)
 	return (i);
 }
 
-//Esta funcao transforma um int numa string
 char	*ft_itoa(int nbr)
 {
 	char			*str_nbr;

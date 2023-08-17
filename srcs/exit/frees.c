@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:48:17 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 15:49:59 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:11:57 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_matrix(char ***matrix)
 
 void	free_mlx(t_cub *cub)
 {
-	//mlx_destroy_image(cub->mlx, &cub->wall);
 	if (cub->mlx != NULL)
 	{
 		mlx_destroy_window(cub->mlx, cub->win);
@@ -70,5 +69,3 @@ void	free_stuff(t_cub *cub)
 	if (cub->fps_str)
 		free(cub->fps_str);
 }
-
-

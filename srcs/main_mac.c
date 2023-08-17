@@ -21,7 +21,7 @@ void create_game(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, SCREENW, SCREENH, "cub3d");
 	if (!cub->win)
 		free_exit(cub, "mlx_new_window failed");
-	mlx_mouse_hide(); //cub->mlx, cub->win
+	mlx_mouse_hide(cub->mlx, cub->win); //cub->mlx, cub->win
 	init_sprites(cub);
 	init_object(cub);
 	cub->ZBuffer = ft_calloc(SCREENW, sizeof(double));
