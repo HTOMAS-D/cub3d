@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_mac.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:57:03 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 18:24:17 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:57:05 by htomas-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	create_game(t_cub *cub)
 		free_exit(cub, "mlx_new_window failed");
 	mlx_mouse_hide();
 	init_sprites(cub);
+	init_object(cub);
 	cub->zbuffer = ft_calloc(SCREENW, sizeof(double));
 	init_player_vars(cub);
 	mlx_hook(cub->win, MOUSE_MOVE, 1L << 6, move_mouse, cub);

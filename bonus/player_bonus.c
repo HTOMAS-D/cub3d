@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:40:55 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 18:36:30 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:40:57 by htomas-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	get_player_vars(char **map)
 				map[y][x] == 'W')
 				add_vars(x, y, map);
 			else if (!(map[y][x] == '1' || map[y][x] == '0' ||
-				map[y][x] == ' '))
+				map[y][x] == ' ' || map[y][x] == 'Z' || map[y][x] == 'D'))
 				free_exit(cub(), "Invalid character on map file");
 		}
 	}

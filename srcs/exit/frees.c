@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:48:17 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 16:11:57 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:40:17 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,4 @@ void	free_stuff(t_cub *cub)
 		free_matrix(&(cub->map.iso_map));
 		cub->map.iso_map = NULL;
 	}
-	if (cub->fps_str)
-		free(cub->fps_str);
 }

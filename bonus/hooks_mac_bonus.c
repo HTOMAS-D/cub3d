@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks_linux.c                                      :+:      :+:    :+:   */
+/*   hooks_mac.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <htomas-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:55:11 by mtiago-s          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/17 19:03:42 by htomas-d         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/17 18:35:35 by mtiago-s         ###   ########.fr       */
->>>>>>> e08ee28213b6ac176688b4de6204591ea8e98727
+/*   Updated: 2023/08/17 18:33:57 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +36,7 @@ int	move_mouse(int x, int y, t_cub *cub)
 	move_x = x - (SCREENW / 2);
 	(void) y;
 	rotation(&(cub->player), MOUSE_SENSITIVITY * move_x);
-	mlx_mouse_move(cub->mlx, cub->win, SCREENW / 2, cub->horizon);
+	mlx_mouse_move(cub->win, SCREENW / 2, cub->horizon);
 	return (1);
 }
 
@@ -75,10 +71,6 @@ int	key_release(int key, t_cub *cub)
 		cub->player.move.a = 0;
 	if (key == KEY_D)
 		cub->player.move.d = 0;
-	if (key == KEY_A_RIGHT)
-		cub->player.move.a_right = 0;
-	if (key == KEY_A_LEFT)
-		cub->player.move.a_left = 0;
 	return (0);
 }
 
@@ -94,9 +86,12 @@ int	get_key(int key, t_cub *cub)
 		cub->player.move.a = 1;
 	if (key == KEY_D)
 		cub->player.move.d = 1;
-	if (key == KEY_A_RIGHT)
-		cub->player.move.a_right = 1;
-	if (key == KEY_A_LEFT)
-		cub->player.move.a_left = 1;
+	if (key == KEY_F && cub->door.x >= 0 && cub->press_f)
+	{
+		if (cub->door.hp)
+			cub->door.hp = 0;
+		else
+			cub->door.hp = 1;
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:55:11 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 17:36:01 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:34:27 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,5 @@ int	get_key(int key, t_cub *cub)
 		cub->player.move.a = 1;
 	if (key == KEY_D)
 		cub->player.move.d = 1;
-	if (key == KEY_F && cub->door.x >= 0 && cub->press_f)
-	{
-		if (cub->door.hp)
-			cub->door.hp = 0;
-		else
-			cub->door.hp = 1;
-	}
 	return (0);
 }
