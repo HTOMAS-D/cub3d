@@ -1,21 +1,33 @@
 NAME    = cub3d
 UNAME   := $(shell uname)
-LFLAGS  =  -L$(LIBMLX)
-OBJ     = $(SRC:%.c=%.o)
-KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP) -D $(F)
-RATES	= -D $(GRATE)
-SRC     =	$(MAIN_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
+LFLAGS 		=  -L$(LIBMLX)
+OBJ     	= $(SRC:%.c=%.o)
+OBJ_BONUS	= $(SRC_BONUS:%.c=%.o)
+KEYCODES 	=  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(ESP) -D $(F)
+RATES		= -D $(GRATE)
+SRC     	=	$(MAIN_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
 				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
 				srcs/utils/str_utils.c srcs/utils/ft_split.c srcs/exit/frees.c	\
 				srcs/parse/map_checker.c srcs/raycasting/raycaster.c \
 				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
 				srcs/parse/player.c srcs/raycasting/img_util.c \
 				$(HOOKS_C) srcs/raycasting/moves.c srcs/utils/ft_itoa.c \
-				srcs/sprites.c srcs/engine.c srcs/fps_counter.c \
+				srcs/sprites.c srcs/engine.c \
 				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
-				srcs/raycasting/minimap.c srcs/utils/ft_atoi.c srcs/parse/check_walls.c \
-				srcs/animations.c srcs/object.c srcs/raycasting/draw_square.c \
-				srcs/raycasting/raycaster_2.c srcs/print_object.c
+				 srcs/utils/ft_atoi.c srcs/parse/check_walls.c \
+				srcs/raycasting/raycaster_2.c
+SRC_BONUS   =	$(MAINBONUS_C) srcs/exit/exit.c srcs/gnl/get_next_line.c 	\
+				srcs/gnl/get_next_line_utils.c srcs/parse/parse_file.c srcs/parse/map.c \
+				srcs/utils/str_utils.c srcs/utils/ft_split.c bonus/frees_bonus.c	\
+				srcs/parse/map_checker.c bonus/raycaster_bonus.c \
+				srcs/parse/color_checker.c srcs/parse/isolate_map.c \
+				bonus/player_bonus.c bonus/img_util_bonus.c \
+				$(HOOKSBONUS_C) bonus/moves_bonus.c srcs/utils/ft_itoa.c \
+				bonus/sprites_bonus.c bonus/engine_bonus.c bonus/fps_counter_bonus.c \
+				srcs/utils/rbg_converter.c srcs/utils/ft_calloc.c \
+				bonus/minimap_bonus.c srcs/utils/ft_atoi.c bonus/check_walls_bonus.c \
+				bonus/animations_bonus.c bonus/object_bonus.c bonus/draw_square_bonus.c \
+				bonus/raycaster_2_bonus.c bonus/print_object_bonus.c
 
 ifeq ($(UNAME), Darwin)
 	INC	= /usr/local/include
@@ -34,7 +46,9 @@ ifeq ($(UNAME), Darwin)
 	ESP = KEY_ESPACE=49
 	GRATE = GAME_RATE=17
 	HOOKS_C = srcs/raycasting/hooks_mac.c
+	HOOKSBONUS_C = bonus/hooks_mac.c
 	MAIN_C = srcs/main_mac.c
+	MAINBONUS_C = bonus/main_mac_bonus.c
 else
 	INC	= /usr/include
 	CFLAGS  = -Wall -Werror -Wextra -g $(KEYCODES) -I$(INC) -Iinclude -O3 $(RATES) -Imlx_linux
@@ -52,7 +66,9 @@ else
 	ESP = KEY_ESPACE=32
 	GRATE = GAME_RATE=100
 	HOOKS_C = srcs/raycasting/hooks_linux.c
+	HOOKSBONUS_C = bonus/hooks_linux_bonus.c
 	MAIN_C = srcs/main_linux.c
+	MAINBONUS_C = bonus/main_linux_bonus.c
 endif
 
 all: $(NAME)
@@ -63,6 +79,7 @@ $(NAME): $(OBJ) lib
 
 clean:
 	@rm -f $(OBJ)
+	@rm -f $(OBJ_BONUS)
 	@echo "$(RED)Housekeeping...$(DEFAULT)"
 
 fclean: clean
@@ -74,6 +91,10 @@ lib:
 	@make -C $(LIBMLX)
 
 re: fclean all
+
+bonus:$(OBJ_BONUS) lib
+	$(CC) $(OBJ_BONUS) $(LFLAGS) -o $(NAME)
+	@echo "$(GREEN)Toma la pah --> $(YELLOW)$(NAME)$(DEFAULT)"
 
 show:
 	@printf "UNAME		: $(UNAME)\n"

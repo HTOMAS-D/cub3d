@@ -6,7 +6,7 @@
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:10:34 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 18:08:25 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:22:56 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,5 @@ int	init_sprites(t_cub *cub)
 	cub->wallso = load_image(cub->map.img_paths[1]);
 	cub->wallwe = load_image(cub->map.img_paths[2]);
 	cub->wallea = load_image(cub->map.img_paths[3]);
-	cub->door.animation.img = load_image("./pics/door_sprite.xpm");
-	cub->door.animation.frame = 0;
-	cub->door.animation.max = 3;
-	cub->door.animation.size = 89;
-	cub->wizard.animation.img = load_image("./pics/wizard-idle.xpm");
-	cub->wizard.animation.frame = 0;
-	cub->wizard.animation.max = 9;
-	cub->wizard.animation.size = 80;
 	return (0);
 }

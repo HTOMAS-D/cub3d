@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks_mac.c                                        :+:      :+:    :+:   */
+/*   hooks_linux.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:55:11 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 18:34:27 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:35:49 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	move_mouse(int x, int y, t_cub *cub)
 	move_x = x - (SCREENW / 2);
 	(void) y;
 	rotation(&(cub->player), MOUSE_SENSITIVITY * move_x);
-	mlx_mouse_move(cub->win, SCREENW / 2, cub->horizon);
+	mlx_mouse_move(cub->mlx, cub->win, SCREENW / 2, cub->horizon);
 	return (1);
 }
 
@@ -86,5 +86,12 @@ int	get_key(int key, t_cub *cub)
 		cub->player.move.a = 1;
 	if (key == KEY_D)
 		cub->player.move.d = 1;
+	if (key == KEY_F && cub->door.x >= 0 && cub->press_f)
+	{
+		if (cub->door.hp)
+			cub->door.hp = 0;
+		else
+			cub->door.hp = 1;
+	}
 	return (0);
 }

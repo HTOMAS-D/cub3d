@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycaster_2.c                                      :+:      :+:    :+:   */
+/*   raycaster_2_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtiago-s <mtiago-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:32:19 by mtiago-s          #+#    #+#             */
-/*   Updated: 2023/08/17 18:30:03 by mtiago-s         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:59:11 by mtiago-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ray_hit(t_cub *cub, t_ray *ray)
 		dda(ray);
 		if (cub->map.iso_map[ray->mapy][ray->mapx] == '1')
 			i = 1;
+		else if (cub->map.iso_map[ray->mapy][ray->mapx] == 'D')
+			copy_ray(ray, &d);
 	}
 	if (!d)
 		cub->door.ray.hit = 0;
@@ -106,6 +108,8 @@ void	raycaster(t_cub *cub)
 		calc_step(cub, &(cub->ray));
 		ray_hit(cub, &(cub->ray));
 		get_wall(cub, &(cub->ray));
+		get_door(cub, &(cub->door.ray));
 		put_screen(cub);
 	}
+	print_object(cub);
 }
