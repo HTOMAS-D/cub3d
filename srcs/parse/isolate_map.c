@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   isolate_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htomas-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: htomas-d <htomas-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:36:37 by htomas-d          #+#    #+#             */
-/*   Updated: 2023/08/17 09:36:39 by htomas-d         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:25:32 by htomas-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	line_nbr(char **map)
 
 	i = -1;
 	while (map && map[++i])
-		;
+	{
+		if (ft_lenstr(map[i]) < 1)
+			parse_exit(&cub()->map, "line too small");
+	}
 	return (i);
 }
 
